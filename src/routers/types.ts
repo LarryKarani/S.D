@@ -12,6 +12,7 @@ export interface LocationStates {
   "/page-collection-2"?: {};
   "/save-the-date"?: {};
   "/signpost"?: {};
+"/save-the-date/9"?: {};
   
   "/page-search"?: {};
   "/home-header-2"?: {};

@@ -41,6 +41,8 @@ export const pages: Page[] = [
   // { path: "/", component: PageCollection2 },
   { path: "/page-collection", component: PageCollection },
   { path: "/save-the-date", component: PageCollection },
+  { path: "/save-the-date/9", component: PageCollection },
+
   { path: "/signpost", component: PageCollection },
   { path: "/page-search", component: PageSearch },
   //

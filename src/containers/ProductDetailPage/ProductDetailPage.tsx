@@ -39,36 +39,39 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(100);
   const [productFromAxios, setProductFromAxios] = useState();
+  const [text, setText] = useState("");
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const url =
-      "https://us-central1-one-of-many-c94a4.cloudfunctions.net/getProductSDD";
-    var path = window.location.pathname;
-    var directories = path.split("/");
-    var _id = directories[directories.length - 1];
-    var _category = directories[directories.length - 2];
-    console.log(_id);
-    console.log(_category);
+    if (window.location.pathname) {
+      const url =
+        "https://us-central1-one-of-many-c94a4.cloudfunctions.net/getProductSDD";
+      var path = window.location.pathname;
+      var directories = path.split("/");
+      var _id = directories[directories.length - 1];
+      var _category = directories[directories.length - 2];
+      console.log(_id);
+      console.log(_category);
 
-    const data = {
-      collection: `product/by_catagory/${_category}`,
-      field: "id",
-      value: _id,
-    };
+      const data = {
+        collection: `product/by_catagory/${_category}`,
+        field: "id",
+        value: _id,
+      };
 
-    axios
-      .post(url, data)
-      .then((response) => {
-        console.log("rere", response.data[0]);
-        setLIST_IMAGES_DEMO([response.data[0].image]);
-        setName(response.data[0].name);
-        setPrice(response.data[0].price);
-        setProductFromAxios(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      axios
+        .post(url, data)
+        .then((response) => {
+          console.log("rere", response.data[0]);
+          setLIST_IMAGES_DEMO([response.data[0].image]);
+          setName(response.data[0].name);
+          setPrice(response.data[0].price);
+          setProductFromAxios(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }, []);
 
   const loll = () => {
@@ -104,9 +107,6 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
         ...(productFromAxios[0] as object),
         quantity: qualitySelected,
       };
-      console.log("pi", productFromAxios[0]);
-      console.log("pi", updatedBob);
-
       dispatch(addProduct(updatedBob as Product));
     }
   };
@@ -252,13 +252,15 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
       <div className="space-y-7 2xl:space-y-8">
         {/* ---------- 1 HEADING ----------  */}
         <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold">{name}</h2>
+          <h2 className="text-2xl sm:text-3xl font-semibold">
+            {name ? name : "ללא שם"}
+          </h2>
 
           <div className="flex items-center mt-5 space-x-4 sm:space-x-5">
             {/* <div className="flex text-xl font-semibold">$112.00</div> */}
             <Prices
               contentClass="py-1 px-2 md:py-1.5 md:px-3 text-lg font-semibold"
-              price={price}
+              price={price ? price : 0}
             />
 
             <div className="h-7 border-l border-slate-300 dark:border-slate-700"></div>
@@ -421,26 +423,16 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
                   alt="product detail 1"
                 />
               </div>
-              {/* {renderStatus()} */}
-              {/* META FAVORITES */}
-              {/* <LikeButton className="absolute right-3 top-3 " /> */}
+              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                <input
+                  type="text"
+                  className=" bg-transparent border-b-2 w-[55%] h-13 border-black  text-2xl sm:text-2xl font-semibold"
+                  placeholder="הזן טקסט"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                />
+              </div>
             </div>
-            {/* <div className="grid grid-cols-2 gap-3 mt-3 sm:gap-6 sm:mt-6 xl:gap-8 xl:mt-8">
-              {[LIST_IMAGES_DEMO[1], LIST_IMAGES_DEMO[2]].map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="aspect-w-11 xl:aspect-w-10 2xl:aspect-w-11 aspect-h-16"
-                  >
-                    <img
-                      src={item}
-                      className="w-full rounded-2xl object-cover"
-                      alt="product detail 1"
-                    />
-                  </div>
-                );
-              })}
-            </div> */}
           </div>
 
           {/* SIDEBAR */}
