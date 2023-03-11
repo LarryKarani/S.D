@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
-import LikeButton from "components/LikeButton";
 import AccordionInfo from "./AccordionInfo";
 import { StarIcon } from "@heroicons/react/24/solid";
 import BagIcon from "components/BagIcon";
@@ -21,25 +20,16 @@ import ButtonSecondary from "shared/Button/ButtonSecondary";
 import SectionPromo2 from "components/SectionPromo2";
 import ModalViewAllReviews from "./ModalViewAllReviews";
 import NotifyAddTocart from "components/NotifyAddTocart";
-import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../../app/mediaRunning/product";
-
 import product from "images/placeholder-small.png";
-import detail1JPG from "images/products/detail1.jpg";
-import detail2JPG from "images/products/detail2.jpg";
-import detail3JPG from "images/products/detail3.jpg";
-import { PRODUCTS } from "data/data";
-
-import { useAppSelector } from "../../app/hooks";
-
+import { Product, PRODUCTS } from "data/data";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { addProduct } from "app/mediaRunning/product";
 export interface ProductDetailPageProps {
   className?: string;
 }
 
 const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
   const { sizes, variants, status, allOfSizes } = PRODUCTS[0];
-
-  const selectedData = useAppSelector((state) => state.products[0]);
   const selectedData2 = useAppSelector((state) => state.products[0]);
   const [LIST_IMAGES_DEMO, setLIST_IMAGES_DEMO] = useState([
     product,
@@ -48,6 +38,8 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
   ]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState(100);
+  const [productFromAxios, setProductFromAxios] = useState();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const url =
@@ -68,10 +60,11 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     axios
       .post(url, data)
       .then((response) => {
-        const pop = response.data;
+        console.log("rere", response.data[0]);
         setLIST_IMAGES_DEMO([response.data[0].image]);
         setName(response.data[0].name);
         setPrice(response.data[0].price);
+        setProductFromAxios(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -92,7 +85,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
   const [isOpenModalViewAllReviews, setIsOpenModalViewAllReviews] =
     useState(false);
 
-  const notifyAddTocart = () => {
+  const addToCartAndNotifyAddTocart = () => {
     toast.custom(
       (t) => (
         <NotifyAddTocart
@@ -105,6 +98,17 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
       ),
       { position: "top-right", id: "nc-product-notify", duration: 3000 }
     );
+
+    if (productFromAxios) {
+      const updatedBob = {
+        ...(productFromAxios[0] as object),
+        quantity: qualitySelected,
+      };
+      console.log("pi", productFromAxios[0]);
+      console.log("pi", updatedBob);
+
+      dispatch(addProduct(updatedBob as Product));
+    }
   };
 
   const renderVariants = () => {
@@ -296,7 +300,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
           </div>
           <ButtonPrimary
             className="flex-1 flex-shrink-0"
-            onClick={notifyAddTocart}
+            onClick={addToCartAndNotifyAddTocart}
           >
             <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
             <span className="ml-3">Add to cart</span>

@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import MyRouter from "routers/index";
+import { getProduct } from "app/mediaRunning/product";
+import { useAppSelector, useAppDispatch } from "./app/hooks";
+
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getProduct());
+  }, []);
+
   return (
     <>
       <div>

@@ -13,12 +13,6 @@ import toast from "react-hot-toast";
 import { Transition } from "@headlessui/react";
 import ModalQuickView from "./ModalQuickView";
 import ProductStatus from "./ProductStatus";
-import ProductDetailPage from "../containers/ProductDetailPage/ProductDetailPage";
-import { productImgs } from "contains/fakeData";
-
-import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../app/mediaRunning/product";
-
 export interface ProductCardProps {
   className?: string;
   data?: Product;
@@ -44,12 +38,6 @@ const ProductCard: FC<ProductCardProps> = ({
   } = data;
   const [variantActive, setVariantActive] = React.useState(0);
   const [showModalQuickView, setShowModalQuickView] = React.useState(false);
-  // const dispatch = useDispatch();
-  // const mediaRunning = useSelector(addProduct);
-
-  // const handleChangeCurrentMedia = (newMedia: Product) => {
-  //   dispatch(addProduct(newMedia));
-  // };
 
   const history = useHistory();
 
@@ -215,8 +203,9 @@ const ProductCard: FC<ProductCardProps> = ({
           onClick={() => notifyAddTocart({ size: "XL" })}
         >
           <BagIcon className="w-3.5 h-3.5 mb-0.5" />
-          <span className="ml-1">Add to bag</span>
+          <span className="ml-1">Addss to bag</span>
         </ButtonPrimary>
+
         <ButtonSecondary
           className="ml-1.5 bg-white hover:!bg-gray-100 hover:text-slate-900 transition-colors shadow-lg"
           fontSize="text-xs"

@@ -27,6 +27,7 @@ export interface Product {
   id: number;
   name: string;
   price: number;
+  quantity: number
   image: string;
   description: string;
   category: string;
@@ -109,6 +110,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 1,
     name: "Rey Nylon Backpack",
+    quantity:1,
     description: "Brown cockroach wings",
     price: 74,
     image: productImgs[0],
@@ -123,6 +125,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 2,
+    quantity:1,
     name: 'Round Buckle 1" Belt',
     description: "Classic green",
     price: 68,
@@ -138,6 +141,7 @@ export const PRODUCTS: Product[] = [
     id: 3,
     name: "Waffle Knit Beanie",
     description: "New blue aqua",
+    quantity:1,
     price: 132,
     image: productImgs[0],
     category: "Category 1",
@@ -152,6 +156,7 @@ export const PRODUCTS: Product[] = [
     id: 4,
     name: "Travel Pet Carrier",
     description: "Dark pink 2023",
+    quantity:1,
     price: 28,
     image:productImgs[0],
     category: "Category 1",
@@ -165,6 +170,7 @@ export const PRODUCTS: Product[] = [
     id: 5,
     name: "Leather Gloves",
     description: "Perfect mint green",
+    quantity:1,
     price: 42,
     image: productImgs[0],
     category: "Category 1",
@@ -179,6 +185,7 @@ export const PRODUCTS: Product[] = [
     id: 6,
     name: "Hoodie Sweatshirt",
     description: "New design 2023",
+    quantity:1,
     price: 30,
     image: productImgs[0],
     category: "Category 1",
@@ -190,6 +197,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 7,
     name: "Wool Cashmere Jacket",
+    quantity:1,
     description: "Matte black",
     price: 12,
     image: productImgs[8],
@@ -204,6 +212,7 @@ export const PRODUCTS: Product[] = [
     id: 8,
     name: "Ella Leather Tote",
     description: "Cream pink",
+    quantity:1,
     price: 145,
     image: productImgs[7],
     category: "Category 1",
@@ -222,6 +231,7 @@ export const SPORT_PRODUCTS: Product[] = [
     id: 1,
     name: "Mastermind Toys",
     description: "Brown cockroach wings",
+    quantity:1,
     price: 74,
     image: productSport1,
     category: "Category 1",
@@ -237,6 +247,7 @@ export const SPORT_PRODUCTS: Product[] = [
     id: 2,
     name: "Jump Rope Kids",
     description: "Classic green",
+    quantity:1,
     price: 68,
     image: productSport2,
     category: "Category 1",
@@ -251,6 +262,7 @@ export const SPORT_PRODUCTS: Product[] = [
     name: "Tee Ball Beanie",
     description: "New blue aqua",
     price: 132,
+    quantity:1,
     image: productSport3,
     category: "Category 1",
     tags: ["tag1", "tag2"],
@@ -264,6 +276,7 @@ export const SPORT_PRODUCTS: Product[] = [
     id: 4,
     name: "Rubber Table Tennis",
     description: "Dark pink 2023",
+    quantity:1,
     price: 28,
     image: productSport4,
     category: "Category 1",
@@ -279,6 +292,7 @@ export const SPORT_PRODUCTS: Product[] = [
     description: "Perfect mint green",
     price: 42,
     image: productSport5,
+    quantity:1,
     category: "Category 1",
     tags: ["tag1", "tag2"],
     variants: DEMO_VARIANTS,
@@ -292,6 +306,7 @@ export const SPORT_PRODUCTS: Product[] = [
     name: "Manhattan Toy WRT",
     description: "New design 2023",
     price: 30,
+    quantity:1,
     image: productSport6,
     category: "Category 1",
     tags: ["tag1", "tag2"],
@@ -302,6 +317,7 @@ export const SPORT_PRODUCTS: Product[] = [
   {
     id: 7,
     name: "Tabletop Football ",
+    quantity:1,
     description: "Matte black",
     price: 12,
     image: productSport7,
@@ -318,6 +334,7 @@ export const SPORT_PRODUCTS: Product[] = [
     description: "Cream pink",
     price: 145,
     image: productSport8,
+    quantity:1,
     category: "Category 1",
     tags: ["tag1", "tag2"],
     variants: DEMO_VARIANT_COLORS,

@@ -1,5 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { Product, PRODUCTS } from "data/data";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { updateProduct } from "app/mediaRunning/product";
 
 export interface NcInputNumberProps {
   className?: string;
@@ -9,6 +12,7 @@ export interface NcInputNumberProps {
   onChange?: (value: number) => void;
   label?: string;
   desc?: string;
+  item?: Product;
 }
 
 const NcInputNumber: FC<NcInputNumberProps> = ({
@@ -19,8 +23,10 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
   onChange,
   label,
   desc,
+  item,
 }) => {
   const [value, setValue] = useState(defaultValue);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setValue(defaultValue);
@@ -31,6 +37,16 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
     setValue((state) => {
       return state - 1;
     });
+    if (item) {
+      console.log(item);
+      console.log(value);
+
+      const updatedBob = {
+        ...item,
+        quantity: value - 1,
+      };
+      dispatch(updateProduct(updatedBob));
+    }
     onChange && onChange(value - 1);
   };
   const handleClickIncrement = () => {
@@ -38,6 +54,16 @@ const NcInputNumber: FC<NcInputNumberProps> = ({
     setValue((state) => {
       return state + 1;
     });
+    if (item) {
+      console.log(item);
+      console.log(value);
+
+      const updatedBob = {
+        ...item,
+        quantity: value + 1,
+      };
+      dispatch(updateProduct(updatedBob));
+    }
     onChange && onChange(value + 1);
   };
 

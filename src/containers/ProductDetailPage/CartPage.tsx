@@ -5,8 +5,29 @@ import { Product, PRODUCTS } from "data/data";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { removeProduct } from "app/mediaRunning/product";
+import React, { useState } from "react";
+import { updateProduct } from "app/mediaRunning/product";
 
 const CartPage = () => {
+  const [quantity, setQuantity] = useState(1); // initialize state with default quantity of 1
+
+  function handleQuantityChange(event: { target: { value: string } }) {
+    setQuantity(parseInt(event.target.value));
+  }
+
+  const dispatch = useAppDispatch();
+  const selectedData2 = useAppSelector((state) => state.products);
+
+  const handleSubmit = (bob: Product) => {
+    const updatedBob = {
+      ...bob,
+      quantity: quantity,
+    };
+    dispatch(updateProduct(updatedBob));
+  };
+
   const renderStatusSoldout = () => {
     return (
       <div className="rounded-full flex items-center justify-center px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
@@ -15,30 +36,39 @@ const CartPage = () => {
       </div>
     );
   };
-
   const renderStatusInstock = () => {
     return (
       <div className="rounded-full flex items-center justify-center px-2.5 py-1.5 text-xs text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
         <CheckIcon className="w-3.5 h-3.5" />
-        <span className="ml-1 leading-none">In Stock</span>
+        <span className="ml-1 leading-none">זמין במלאי</span>
       </div>
     );
   };
 
-  const renderProduct = (item: Product, index: number) => {
-    const { image, price, name } = item;
+  const remove = (product: Product) => {
+    dispatch(removeProduct(product));
+    console.log("ssfdasd", selectedData2);
+  };
 
+  const renderProduct = (item: Product, index: number) => {
+    const { image, price, name, quantity } = item;
+    if (selectedData2) {
+      console.log("selectedData2", selectedData2);
+    }
     return (
       <div
         key={index}
         className="relative flex py-8 sm:py-10 xl:py-12 first:pt-0 last:pb-0"
       >
         <div className="relative h-36 w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
-          <img
-            src={image}
-            alt={name}
-            className="h-full w-full object-contain object-center"
-          />
+          {image ? (
+            <img
+              src={image}
+              alt={name}
+              className="h-full w-full object-contain object-center"
+            />
+          ) : null}
+
           <Link to="/product-detail" className="absolute inset-0"></Link>
         </div>
 
@@ -133,11 +163,18 @@ const CartPage = () => {
                 </div>
 
                 <div className="mt-3 flex justify-between w-full sm:hidden relative">
-                  <select
+                  {/* <form onSubmit={() => handleSubmit(item)}> */}
+                  {/* <select
                     name="qty"
                     id="qty"
+                    // value={quantity}
                     className="form-select text-sm rounded-md py-1 border-slate-200 dark:border-slate-700 relative z-10 dark:bg-slate-800 "
+                    onChange={handleQuantityChange}
                   >
+                    <option value="" disabled selected>
+                      בחר כמות
+                    </option>
+
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -145,7 +182,16 @@ const CartPage = () => {
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="7">7</option>
-                  </select>
+                  </select> */}
+
+                  {/* <button type="submit">Submit</button> */}
+                  {/* </form> */}
+                  <NcInputNumber
+                    defaultValue={quantity}
+                    item={item}
+                    className="relative z-10"
+                  />
+
                   <Prices
                     contentClass="py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium h-full"
                     price={price}
@@ -154,7 +200,11 @@ const CartPage = () => {
               </div>
 
               <div className="hidden sm:block text-center relative">
-                <NcInputNumber className="relative z-10" />
+                <NcInputNumber
+                  defaultValue={quantity}
+                  item={item}
+                  className="relative z-10"
+                />
               </div>
 
               <div className="hidden flex-1 sm:flex justify-end">
@@ -164,22 +214,19 @@ const CartPage = () => {
           </div>
 
           <div className="flex mt-auto pt-4 items-end justify-between text-sm">
-            {Math.random() > 0.6
-              ? renderStatusSoldout()
-              : renderStatusInstock()}
-
+            {renderStatusInstock()}
             <a
               href="##"
               className="relative z-10 flex items-center mt-3 font-medium text-primary-6000 hover:text-primary-500 text-sm "
             >
-              <span>Remove</span>
+              {/* <span>Remove</span> */}
+              <button onClick={() => remove(item)}>הסר מהעגלה</button>
             </a>
           </div>
         </div>
       </div>
     );
   };
-
   return (
     <div className="nc-CartPage">
       <Helmet>
@@ -189,7 +236,7 @@ const CartPage = () => {
       <main className="container py-16 lg:pb-28 lg:pt-20 ">
         <div className="mb-12 sm:mb-16">
           <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold ">
-            Shopping Cart
+            עגלת הקניות
           </h2>
           <div className="block mt-3 sm:mt-5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-400">
             <Link to={"/#"} className="">
@@ -200,21 +247,14 @@ const CartPage = () => {
               Clothing Categories
             </Link>
             <span className="text-xs mx-1 sm:mx-1.5">/</span>
-            <span className="underline">Shopping Cart</span>
+            <span className="underline">Shossspping Cart</span>
           </div>
         </div>
 
         <hr className="border-slate-200 dark:border-slate-700 my-10 xl:my-12" />
-
         <div className="flex flex-col lg:flex-row">
           <div className="w-full lg:w-[60%] xl:w-[55%] divide-y divide-slate-200 dark:divide-slate-700 ">
-            {[
-              PRODUCTS[0],
-              PRODUCTS[1],
-              PRODUCTS[2],
-              PRODUCTS[3],
-              PRODUCTS[4],
-            ].map(renderProduct)}
+            {selectedData2 ? selectedData2.map(renderProduct) : null}
           </div>
           <div className="border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-700 my-10 lg:my-0 lg:mx-10 xl:mx-16 2xl:mx-20 flex-shrink-0"></div>
           <div className="flex-1">
