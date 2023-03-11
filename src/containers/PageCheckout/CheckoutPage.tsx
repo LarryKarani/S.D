@@ -1,6 +1,7 @@
 import Label from "components/Label/Label";
 import NcInputNumber from "components/NcInputNumber";
 import Prices from "components/Prices";
+import TotalPrice from "components/TotalPrice";
 import { Product, PRODUCTS } from "data/data";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
@@ -262,28 +263,7 @@ const CheckoutPage = () => {
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-between py-2.5">
-                <span>Subtotal</span>
-                <span className="font-semibold text-slate-900 dark:text-slate-200">
-                  $249.00
-                </span>
-              </div>
-              <div className="flex justify-between py-2.5">
-                <span>Shipping estimate</span>
-                <span className="font-semibold text-slate-900 dark:text-slate-200">
-                  $5.00
-                </span>
-              </div>
-              <div className="flex justify-between py-2.5">
-                <span>Tax estimate</span>
-                <span className="font-semibold text-slate-900 dark:text-slate-200">
-                  $24.90
-                </span>
-              </div>
-              <div className="flex justify-between font-semibold text-slate-900 dark:text-slate-200 text-base pt-4">
-                <span>Order total</span>
-                <span>$276.00</span>
-              </div>
+              <TotalPrice />
             </div>
             <ButtonPrimary className="mt-8 w-full">Confirm order</ButtonPrimary>
             <div className="mt-5 text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center">

@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { removeProduct } from "app/mediaRunning/product";
 import React, { useState } from "react";
 import { updateProduct } from "app/mediaRunning/product";
+import TotalPrice from "components/TotalPrice";
 
 const CartPage = () => {
   const [quantity, setQuantity] = useState(1); // initialize state with default quantity of 1
@@ -260,30 +261,8 @@ const CartPage = () => {
           <div className="flex-1">
             <div className="sticky top-28">
               <h3 className="text-lg font-semibold ">Order Summary</h3>
-              <div className="mt-7 text-sm text-slate-500 dark:text-slate-400 divide-y divide-slate-200/70 dark:divide-slate-700/80">
-                <div className="flex justify-between pb-4">
-                  <span>Subtotal</span>
-                  <span className="font-semibold text-slate-900 dark:text-slate-200">
-                    $249.00
-                  </span>
-                </div>
-                <div className="flex justify-between py-4">
-                  <span>Shpping estimate</span>
-                  <span className="font-semibold text-slate-900 dark:text-slate-200">
-                    $5.00
-                  </span>
-                </div>
-                <div className="flex justify-between py-4">
-                  <span>Tax estimate</span>
-                  <span className="font-semibold text-slate-900 dark:text-slate-200">
-                    $24.90
-                  </span>
-                </div>
-                <div className="flex justify-between font-semibold text-slate-900 dark:text-slate-200 text-base pt-4">
-                  <span>Order total</span>
-                  <span>$276.00</span>
-                </div>
-              </div>
+              <TotalPrice />
+
               <ButtonPrimary href="/checkout" className="mt-8 w-full">
                 Checkout
               </ButtonPrimary>
