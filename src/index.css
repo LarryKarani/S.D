@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+.hebrew-text {
+    direction: rtl;
+    text-align: right; /* if needed */
+  }

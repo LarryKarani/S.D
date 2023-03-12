@@ -30,6 +30,7 @@ function PageHome() {
 
       <div className="container relative space-y-24 my-24 lg:space-y-32 lg:my-32">
         {/* SECTION */}
+        {/* <SectionHowItWork /> */}
 
         {/* SECTION */}
         {/* <SectionPromo1 /> */}
@@ -41,12 +42,13 @@ function PageHome() {
           </div> */}
 
         <SectionSliderProductCard
-          heading="Best Sellers"
-          subHeading="Best selling of the month"
+          className="hebrew-text"
+          heading="הדגמים המובילים"
+          subHeading="מובילי החודש"
         />
 
         {/*  */}
-        <SectionPromo2 />
+        <SectionPromo2 className="hebrew-text" />
 
         {/* SECTION 3 */}
         {/* <SectionSliderLargeProduct cardStyle="style2" /> */}

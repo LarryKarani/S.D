@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import NcImage from "shared/NcImage/NcImage";
-import HIW1img from "images/HIW1img.png";
-import HIW2img from "images/HIW2img.png";
+import HIW2img from "images/HIW1img11.png";
+import HIW1img from "images/HIW2img.png";
 import HIW3img from "images/HIW3img.png";
 import HIW4img from "images/HIW4img.png";
 import VectorImg from "images/VectorHIW.svg";
@@ -17,30 +17,30 @@ const DEMO_DATA = [
     id: 1,
     img: HIW1img,
     imgDark: HIW1img,
-    title: "Filter & Discover",
-    desc: "Smart filtering and suggestions make it easy to find",
+    title: "בחרו את הדגם",
+    desc: "בחרו את אחד הדגמים מבין הדגמים המובילים שלנו",
   },
   {
     id: 2,
     img: HIW2img,
     imgDark: HIW2img,
-    title: "Add to bag",
+    title: "בחרו את הטקסט",
     desc: "Easily select the correct items and add them to the cart",
   },
   {
     id: 3,
     img: HIW3img,
     imgDark: HIW3img,
-    title: "Fast shipping",
+    title: "הוסיפו לעגלת הקניות המוצר ",
     desc: "The carrier will confirm and ship quickly to you",
   },
-  {
-    id: 4,
-    img: HIW4img,
-    imgDark: HIW4img,
-    title: "Enjoy the product",
-    desc: "Have fun and enjoy your 5-star quality products",
-  },
+  // {
+  //   id: 4,
+  //   img: HIW3img,
+  //   imgDark: HIW3img,
+  //   title: "הוסיפו לעגלת הקניות המוצר יחכה לכם שמה",
+  //   // desc: "The carrier will confirm and ship quickly to you",
+  // },
 ];
 
 const SectionHowItWork: FC<SectionHowItWorkProps> = ({
@@ -49,10 +49,10 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
 }) => {
   return (
     <div
-      className={`nc-SectionHowItWork ${className}`}
+      className={`nc-SectionHowItWork  ${className}`}
       data-nc-id="SectionHowItWork"
     >
-      <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-16 xl:gap-20">
+      <div className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 xl:gap-10">
         <img
           className="hidden md:block absolute inset-x-0 top-5"
           src={VectorImg}
@@ -69,21 +69,21 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
               src={item.img}
             />
             <div className="text-center mt-auto space-y-5">
-              <Badge
+              {/* <Badge
                 name={`Step ${index + 1}`}
                 color={
                   !index
-                    ? "red"
+                    ? "yellow"
                     : index === 1
-                    ? "indigo"
+                    ? "yellow"
                     : index === 2
                     ? "yellow"
                     : "purple"
                 }
-              />
+              /> */}
               <h3 className="text-base font-semibold">{item.title}</h3>
               <span className="block text-slate-600 dark:text-slate-400 text-sm leading-6">
-                {item.desc}
+                {item.desc ? item.desc : null}
               </span>
             </div>
           </div>

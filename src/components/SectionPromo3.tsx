@@ -24,10 +24,10 @@ const SectionPromo3: FC<SectionPromo3Props> = ({ className = "lg:pt-10" }) => {
         </div>
 
         <div className="lg:w-[50%] max-w-lg relative">
-          <h2 className="font-semibold text-4xl md:text-5xl">
+          <h2 className="font-semibold text-4xl md:text-5xl hebrew-text ">
             אל תחמיצו את המבצעים השווים שלנו
           </h2>
-          <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
+          <span className="block mt-5 text-neutral-500 dark:text-neutral-400 hebrew-text">
             היכנסו לרשימת התפוצה ותקבלנו עדכונים למבצעים שלנו
           </span>
           <ul className="space-y-4 mt-10">

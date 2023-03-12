@@ -16,25 +16,25 @@ export interface CardCategoryData {
 }
 const CATS: CardCategoryData[] = [
   {
-    name: "Travel Kits",
-    desc: "20+ categories",
+    name: "מדינות באירופה",
+    desc: "20+ מדינות",
     img: department1Png,
     color: "bg-indigo-100",
   },
   {
-    name: "Beauty Products",
-    desc: "10+ categories",
+    name: "מתנה לגבר",
+    desc: "10+ ",
     img: department2Png,
     color: "bg-slate-100",
   },
   {
-    name: "Sport Kits",
-    desc: "34+ categories",
+    name: "שלטי הכוונה",
+    desc: "34+ ",
     img: department3Png,
     color: "bg-sky-100",
   },
   {
-    name: "Pets Food",
+    name: "שלטים בהבלטה",
     desc: "12+ categories",
     img: department4Png,
     color: "bg-orange-100",
@@ -49,7 +49,7 @@ export interface SectionSliderCategoriesProps {
 }
 
 const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
-  heading = "Shop by department",
+  heading = "גלה קטגריות חדשות",
   subHeading = "",
   className = "",
   itemClassName = "",
@@ -95,12 +95,12 @@ const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
   }, [UNIQUE_CLASS]);
 
   return (
-    <div className={`nc-SectionSliderCategories ${className}`}>
+    <div className={`nc-SectionSliderCategories ${className} `}>
       <div className={`${UNIQUE_CLASS} flow-root`}>
-        <Heading desc={subHeading} hasNextPrev>
+        <Heading desc={subHeading} hasNextPrev className="hebrew-text">
           {heading}
         </Heading>
-        <div className="glide__track" data-glide-el="track">
+        <div className="glide__track " data-glide-el="track">
           <ul className="glide__slides">
             {data.map((item, index) => (
               <li key={index} className={`glide__slide ${itemClassName}`}>

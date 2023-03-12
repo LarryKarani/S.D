@@ -282,7 +282,7 @@ const ProductCard: FC<ProductCardProps> = ({
             // }
           >
             <NcImage
-              containerClassName="flex aspect-w-11 aspect-h-12 w-full h-0"
+              containerClassName="flex aspect-w-11 aspect-h-5 w-full h-0"
               src={image}
               className="object-cover w-full h-full drop-shadow-xl"
             />
@@ -290,9 +290,9 @@ const ProductCard: FC<ProductCardProps> = ({
 
           <ProductStatus status={status} />
 
-          <LikeButton liked={isLiked} className="absolute top-3 right-3 z-10" />
+          {/* <LikeButton liked={isLiked} className="absolute top-3 right-3 z-10" /> */}
 
-          {renderGroupButtons()}
+          {/* {renderGroupButtons()} */}
         </div>
 
         <div className="space-y-4 px-2.5 pt-5 pb-2.5">
@@ -323,10 +323,10 @@ const ProductCard: FC<ProductCardProps> = ({
       </div>
 
       {/* QUICKVIEW */}
-      <ModalQuickView
+      {/* <ModalQuickView
         show={showModalQuickView}
         onCloseModalQuickView={() => setShowModalQuickView(false)}
-      />
+      /> */}
     </>
   );
 };
