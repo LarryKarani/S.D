@@ -1,8 +1,11 @@
-import React, { FC, useEffect, useId, useRef } from "react";
+import React, { FC, useEffect, useId, useRef, useState } from "react";
 import Heading from "components/Heading/Heading";
 import Glide from "@glidejs/glide";
 import ProductCard from "./ProductCard";
 import { Product, PRODUCTS } from "data/data";
+import axios from "axios";
+
+import { getRecommendedProduct } from "../data/axiosFunction";
 
 export interface SectionSliderProductCardProps {
   className?: string;
@@ -21,12 +24,21 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
   headingClassName,
   heading,
   subHeading = "REY backpacks & bags",
-  data = PRODUCTS.filter((_, i) => i < 8 && i > 2),
 }) => {
   const sliderRef = useRef(null);
   const id = useId();
   const UNIQUE_CLASS = "glidejs" + id.replace(/:/g, "_");
+  const [data, setData] = useState(PRODUCTS);
 
+  useEffect(() => {
+    getRecommendedProduct()
+      .then((response) => {
+        setData(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   useEffect(() => {
     if (!sliderRef.current) {
       return () => {};
@@ -80,11 +92,13 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
         </Heading>
         <div className="glide__track" data-glide-el="track">
           <ul className="glide__slides">
-            {data.map((item, index) => (
-              <li key={index} className={`glide__slide ${itemClassName}`}>
-                <ProductCard data={item} />
-              </li>
-            ))}
+            {data.length > 0
+              ? data.map((item, index) => (
+                  <li key={index} className={`glide__slide `}>
+                    <ProductCard data={item} />
+                  </li>
+                ))
+              : null}
           </ul>
         </div>
       </div>
