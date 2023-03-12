@@ -53,11 +53,11 @@ const PageCollection: FC<PageCollectionProps> = ({ className = "" }) => {
       <div className="container py-16 lg:pb-28 lg:pt-20 space-y-16 sm:space-y-20 lg:space-y-28">
         <div className="space-y-10 lg:space-y-14">
           {/* HEADING */}
-          <div className="max-w-screen-sm">
-            <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text">
+          <div className="">
+            <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
               שלטים בעיצוב אישי{" "}
             </h2>
-            <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text">
+            <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
               שלטי הכוונה, העמידים והאיכותיים ביותר
             </span>
           </div>

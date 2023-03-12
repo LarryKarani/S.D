@@ -7,3 +7,7 @@
     direction: rtl;
     text-align: right; /* if needed */
   }
+  .hebrew-text-center {
+    direction: rtl;
+    text-align: center;
+  }
