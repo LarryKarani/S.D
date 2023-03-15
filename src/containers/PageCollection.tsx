@@ -16,6 +16,7 @@ export interface PageCollectionProps {
 
 const PageCollection: FC<PageCollectionProps> = ({ className = "" }) => {
   const [pors, setPors] = useState(PRODUCTS);
+  const [slug, setSlug] = useState("");
 
   useEffect(() => {
     const url =
@@ -30,6 +31,10 @@ const PageCollection: FC<PageCollectionProps> = ({ className = "" }) => {
       slug: lastDirecotry,
     };
 
+    if (lastDirecotry) {
+      setSlug(lastDirecotry);
+    }
+
     axios
       .post(url, data)
       .then((response) => {
@@ -40,6 +45,106 @@ const PageCollection: FC<PageCollectionProps> = ({ className = "" }) => {
         console.error(error);
       });
   }, []);
+
+  const _renderHeader = () => {
+    if (slug == "save-the-date") {
+      return (
+        <div className="">
+          <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
+            שלטים לאירועים ושמחות
+          </h2>
+          <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
+            שלטים לאירוע שלך, כאן תוכלו למצוא מגוון רחב של דגמים לאירוע שלך,
+            ליום צילומים ולמזכרת מהיום המאושר
+          </span>
+        </div>
+      );
+    }
+    if (slug == "truck") {
+      return (
+        <div className="">
+          <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
+            שלטים למשאית שלך
+          </h2>
+          <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
+            הבאנו מהעולם את השלטים המבוקשים שאתם אוהבים, קנייה מהנה
+          </span>
+        </div>
+      );
+    }
+    if (slug == "houses-signs") {
+      return (
+        <div className="">
+          <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
+            שלטים לדלת/שמות משפחה
+          </h2>
+          <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
+            כאן תוכלו למצוא שלטים יחודיים לכניסה לבית, קנייה מהנה{" "}
+          </span>
+        </div>
+      );
+    }
+    if (slug == "dog-signs") {
+      return (
+        <div className="">
+          <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
+            כלב בחצר{" "}
+          </h2>
+          <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
+            שלטי אזהרה כלב בחצר{" "}
+          </span>
+        </div>
+      );
+    }
+    if (slug == "dog-signs") {
+      return (
+        <div className="">
+          <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
+            כלב בחצר{" "}
+          </h2>
+          <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
+            שלטי אזהרה כלב בחצר{" "}
+          </span>
+        </div>
+      );
+    }
+    if (slug == "dog-signs") {
+      return (
+        <div className="">
+          <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
+            כלב בחצר{" "}
+          </h2>
+          <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
+            שלטי אזהרה כלב בחצר{" "}
+          </span>
+        </div>
+      );
+    }
+    if (slug == "parking-signs") {
+      return (
+        <div className="">
+          <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
+            שלטי חנייה פרטית
+          </h2>
+          <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
+            שלטים חזקים מאוד, עמידים בשמש ובגשם, שמרו על החנייה!!
+          </span>
+        </div>
+      );
+    }
+    if (slug == "hairdressers-signs") {
+      return (
+        <div className="">
+          <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
+            שלטים למספרה
+          </h2>
+          <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
+            מוזמנים להוסיף סטייל למספרה שלכם
+          </span>
+        </div>
+      );
+    }
+  };
 
   return (
     <div
@@ -53,16 +158,12 @@ const PageCollection: FC<PageCollectionProps> = ({ className = "" }) => {
       <div className="container py-16 lg:pb-28 lg:pt-20 space-y-16 sm:space-y-20 lg:space-y-28">
         <div className="space-y-10 lg:space-y-14">
           {/* HEADING */}
-          <div className="">
-            <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold hebrew-text-center">
-              שלטים בעיצוב אישי{" "}
-            </h2>
-            <span className="block mt-4 text-neutral-500 dark:text-neutral-400 text-sm sm:text-base hebrew-text-center">
-              שלטי הכוונה, העמידים והאיכותיים ביותר
-            </span>
-          </div>
 
-          <SectionHowItWork className="section-how-it-work" />
+          {_renderHeader()}
+
+          {slug == "custom-made" ? (
+            <SectionHowItWork className="section-how-it-work" />
+          ) : null}
 
           <hr className="border-slate-200 dark:border-slate-700" />
           <main>
@@ -74,23 +175,8 @@ const PageCollection: FC<PageCollectionProps> = ({ className = "" }) => {
                 <ProductCard data={item} key={index} />
               ))}
             </div>
-
-            {/* PAGINATION */}
-            {/* <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
-              <Pagination />
-              <ButtonPrimary loading>Show me more</ButtonPrimary>
-            </div> */}
           </main>
         </div>
-
-        {/* === SECTION 5 === */}
-        {/* <hr className="border-slate-200 dark:border-slate-700" /> */}
-
-        {/* <SectionSliderCollections /> */}
-        {/* <hr className="border-slate-200 dark:border-slate-700" /> */}
-
-        {/* SUBCRIBES */}
-        {/* <SectionPromo1 /> */}
       </div>
     </div>
   );

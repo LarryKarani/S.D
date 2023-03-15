@@ -10,9 +10,16 @@ export interface LocationStates {
   "/product-detail-2"?: {};
   "/page-collection"?: {};
   "/page-collection-2"?: {};
+
+  "/custom-made"?: {};
   "/save-the-date"?: {};
-  "/signpost"?: {};
-"/save-the-date/9"?: {};
+  "/truck"?: {};
+  "/dog-signs"?: {};
+  "/parking-signs"?: {};
+  "/houses-signs"?: {};
+  "/hairdressers-signs"?: {};
+
+
   
   "/page-search"?: {};
   "/home-header-2"?: {};

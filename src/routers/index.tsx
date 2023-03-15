@@ -40,12 +40,17 @@ export const pages: Page[] = [
   //
   // { path: "/", component: PageCollection2 },
   { path: "/page-collection", component: PageCollection },
-  { path: "/save-the-date", component: PageCollection },
-  { path: "/save-the-date/9", component: PageCollection },
 
-  { path: "/signpost", component: PageCollection },
-  { path: "/page-search", component: PageSearch },
+  { path: "/custom-made", component: PageCollection },
+  { path: "/save-the-date", component: PageCollection },
+  { path: "/truck", component: PageCollection },
+  { path: "/dog-signs", component: PageCollection },
+  { path: "/parking-signs", component: PageCollection },
+  { path: "/houses-signs", component: PageCollection },
+  { path: "/hairdressers-signs", component: PageCollection },
+
   //
+  { path: "/page-search", component: PageSearch },
   { path: "/account", component: AccountPage },
   { path: "/account-savelists", component: AccountSavelists },
   { path: "/account-change-password", component: AccountPass },

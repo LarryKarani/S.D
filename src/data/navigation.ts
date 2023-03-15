@@ -274,29 +274,67 @@ export const NAVIGATION_DEMO_2: NavItemType[] = [
 export const NAVIGATION_DEMO_1: NavItemType[] = [
   {
     id: ncNanoId(),
+    href: "/custom-made",
+    name: "עיצוב אישי",
+  },
+  {
+    id: ncNanoId(),
     href: "/save-the-date",
     name: "save the date",
   },
+  
   {
     id: ncNanoId(),
-    href: "/signpost",
-    name: "שלטי הכוונה",
-  },
-
-  {
-    id: ncNanoId(),
-    href: "/signpost",
-    name: "שלטים לדלת ",
+    href: "/truck",
+    name: "למשאיות",
   },
   {
     id: ncNanoId(),
-    href: "/signpost",
-    name: "מבחן",
+    href: "/houses-signs",
+    name: "שלטים לבית ",
+  },
+  {
+    id: ncNanoId(),
+    href: "/dog-signs",
+    name: "כלב בחצר",
+  },
+  {
+    id: ncNanoId(),
+    href: "/parking-signs",
+    name: "חנייה פרטית ",
   }
   ,
   {
     id: ncNanoId(),
-    href: "/signpost",
-    name: "דגמי רכבים",
-  }
+    href: "/hairdressers-signs",
+    name: "למספרות",
+  },
+  {
+    id: ncNanoId(),
+    href: "/about",
+    name: "עוד",
+    type: "dropdown",
+    children: [
+      {
+        id: ncNanoId(),
+        href: "/about",
+        name: "אודות",
+      },
+      {
+        id: ncNanoId(),
+        href: "/contact",
+        name: "צור קשר",
+      },
+      {
+        id: ncNanoId(),
+        href: "/login",
+        name: "היכנס",
+      },
+      {
+        id: ncNanoId(),
+        href: "/signup",
+        name: "הירשם",
+      }
+    ],
+  },
 ];

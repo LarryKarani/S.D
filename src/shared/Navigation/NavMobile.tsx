@@ -78,7 +78,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
       <Disclosure
         key={index}
         as="li"
-        className="text-slate-900 dark:text-white"
+        className="text-slate-900 dark:text-white  hebrew-text"
       >
         <NavLink
           exact
@@ -150,7 +150,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
     <div className="overflow-y-auto w-full h-screen py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 divide-y-2 divide-neutral-100 dark:divide-neutral-800">
       <div className="py-6 px-5">
         <Logo />
-        <div className="flex flex-col mt-5 text-slate-600 dark:text-slate-300 text-sm">
+        <div className="flex flex-col mt-5 text-slate-600  hebrew-text dark:text-slate-300 text-sm">
           <span>קנייה מהנה</span>
 
           <div className="flex justify-between items-center mt-4">

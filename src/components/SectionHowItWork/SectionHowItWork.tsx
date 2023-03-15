@@ -34,13 +34,6 @@ const DEMO_DATA = [
     title: "הוסיפו לעגלת הקניות המוצר ",
     desc: "The carrier will confirm and ship quickly to you",
   },
-  // {
-  //   id: 4,
-  //   img: HIW3img,
-  //   imgDark: HIW3img,
-  //   title: "הוסיפו לעגלת הקניות המוצר יחכה לכם שמה",
-  //   // desc: "The carrier will confirm and ship quickly to you",
-  // },
 ];
 
 const SectionHowItWork: FC<SectionHowItWorkProps> = ({
