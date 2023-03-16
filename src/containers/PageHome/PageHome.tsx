@@ -42,7 +42,6 @@ function PageHome() {
           </div> */}
 
         <SectionSliderProductCard
-          className="hebrew-text"
           heading="הדגמים המובילים"
           subHeading="מובילי החודש"
         />

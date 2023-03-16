@@ -83,7 +83,7 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
     <div className={`nc-SectionSliderProductCard ${className}`}>
       <div className={`${UNIQUE_CLASS} flow-root`} ref={sliderRef}>
         <Heading
-          className={headingClassName}
+          className={`${headingClassName} `}
           fontClass={headingFontClassName}
           rightDescText={subHeading}
           hasNextPrev

@@ -97,7 +97,7 @@ const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
   return (
     <div className={`nc-SectionSliderCategories ${className} `}>
       <div className={`${UNIQUE_CLASS} flow-root`}>
-        <Heading desc={subHeading} hasNextPrev className="hebrew-text">
+        <Heading desc={subHeading} hasNextPrev>
           {heading}
         </Heading>
         <div className="glide__track " data-glide-el="track">
