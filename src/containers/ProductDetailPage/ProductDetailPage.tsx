@@ -24,6 +24,10 @@ import product from "images/placeholder-small.png";
 import { Product, PRODUCTS } from "data/data";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { addProduct } from "app/mediaRunning/product";
+import Input from "shared/Input/Input";
+import ButtonCircle from "shared/Button/ButtonCircle";
+import { ArrowSmallRightIcon } from "@heroicons/react/24/solid";
+
 export interface ProductDetailPageProps {
   className?: string;
 }
@@ -38,8 +42,12 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
   ]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState(100);
+  const [fleg, setFleg] = useState(true);
   const [productFromAxios, setProductFromAxios] = useState();
-  const [text, setText] = useState("");
+  const [text, setText] = useState(" ");
+  const [text2, setText2] = useState(" ");
+  const [size, setSize] = useState(" ");
+  const [der, setDer] = useState("hebrew-text");
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -118,14 +126,6 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
 
     return (
       <div>
-        <label htmlFor="">
-          <span className="text-sm font-medium">
-            Color:
-            <span className="ml-1 font-semibold">
-              {variants[variantActive].name}
-            </span>
-          </span>
-        </label>
         <div className="flex mt-3">
           {variants.map((variant, index) => (
             <div
@@ -157,24 +157,16 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     }
     return (
       <div>
-        <div className="flex justify-between font-medium text-sm">
+        <div className="ז">
           <label htmlFor="">
             <span className="">
               Size:
               <span className="ml-1 font-semibold">{sizeSelected}</span>
             </span>
           </label>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="##"
-            className="text-primary-6000 hover:text-primary-500"
-          >
-            See sizing chart
-          </a>
         </div>
         <div className="grid grid-cols-5 sm:grid-cols-7 gap-2 mt-3">
-          {allOfSizes.map((size, index) => {
+          {["XS", "S", "M", "L", "XL", "2XL", "3XL"].map((size, index) => {
             const isActive = size === sizeSelected;
             const sizeOutStock = !sizes.includes(size);
             return (
@@ -190,12 +182,6 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
                     ? "bg-primary-6000 border-primary-6000 text-white hover:bg-primary-6000"
                     : "border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200 hover:bg-neutral-50 dark:hover:bg-neutral-700"
                 }`}
-                onClick={() => {
-                  if (sizeOutStock) {
-                    return;
-                  }
-                  setSizeSelected(size);
-                }}
               >
                 {size}
               </div>
@@ -247,82 +233,159 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     return null;
   };
 
-  const renderSectionContent = () => {
-    return (
-      <div className="space-y-7 2xl:space-y-8">
-        {/* ---------- 1 HEADING ----------  */}
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold">
-            {name ? name : "ללא שם"}
-          </h2>
+  const flege = () => {
+    setFleg(true);
+    setText2("");
+    setSize("lg");
+  };
 
-          <div className="flex items-center mt-5 space-x-4 sm:space-x-5">
-            {/* <div className="flex text-xl font-semibold">$112.00</div> */}
-            <Prices
-              contentClass="py-1 px-2 md:py-1.5 md:px-3 text-lg font-semibold"
-              price={price ? price : 0}
-            />
+  const towRow = () => {
+    setFleg(false);
+    setSize("lg");
+  };
 
-            <div className="h-7 border-l border-slate-300 dark:border-slate-700"></div>
+  const renderSectionContent = () => (
+    <div className="space-y-7 2xl:space-y-8">
+      {/* ---------- 1 HEADING ----------  */}
+      <div>
+        <h2 className="text-2xl sm:text-3xl font-semibold">
+          {name ? name : "ללא שם"}
+        </h2>
 
-            <div className="flex items-center">
-              <a
-                href="#reviews"
-                className="flex items-center text-sm font-medium"
-              >
-                <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />
-                <div className="ml-1.5 flex">
-                  <span>4.9</span>
-                  <span className="block mx-2">·</span>
-                  <span className="text-slate-600 dark:text-slate-400 underline">
-                    142 reviews
-                  </span>
-                </div>
-              </a>
-              <span className="hidden sm:block mx-2.5">·</span>
-              <div className="hidden sm:flex items-center text-sm">
-                <SparklesIcon className="w-3.5 h-3.5" />
-                <span className="ml-1 leading-none">{status}</span>
+        <div className="flex items-center mt-5 space-x-4 sm:space-x-5">
+          {/* <div className="flex text-xl font-semibold">$112.00</div> */}
+          <Prices
+            contentClass="py-1 px-2 md:py-1.5 md:px-3 text-lg font-semibold"
+            price={price ? price : 0}
+          />
+
+          <div className="h-7 border-l border-slate-300 dark:border-slate-700"></div>
+
+          <div className="flex items-center">
+            <a
+              href="#reviews"
+              className="flex items-center text-sm font-medium"
+            >
+              <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />
+              <div className="ml-1.5 flex">
+                <span>4.9</span>
+                <span className="block mx-2">·</span>
+                <span className="text-slate-600 dark:text-slate-400 underline">
+                  142 reviews
+                </span>
               </div>
+            </a>
+            <span className="hidden sm:block mx-2.5">·</span>
+
+            <div className="hidden sm:flex items-center text-sm">
+              <SparklesIcon className="w-3.5 h-3.5" />
+              <span className="ml-1 leading-none">{status}</span>
             </div>
           </div>
         </div>
-
-        {/* ---------- 3 VARIANTS AND SIZE LIST ----------  */}
-        <div className="">{renderVariants()}</div>
-        <div className="">{renderSizeList()}</div>
-
-        {/*  ---------- 4  QTY AND ADD TO CART BUTTON */}
-        <div className="flex space-x-3.5">
-          <div className="flex items-center justify-center bg-slate-100/70 dark:bg-slate-800/70 px-2 py-3 sm:p-3.5 rounded-full">
-            <NcInputNumber
-              defaultValue={qualitySelected}
-              onChange={setQualitySelected}
-            />
-          </div>
-          <ButtonPrimary
-            className="flex-1 flex-shrink-0"
-            onClick={addToCartAndNotifyAddTocart}
-          >
-            <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
-            <span className="ml-3">Add to cart</span>
-          </ButtonPrimary>
-        </div>
-
-        {/*  */}
-        <hr className=" 2xl:!my-10 border-slate-200 dark:border-slate-700"></hr>
-        {/*  */}
-
-        {/* ---------- 5 ----------  */}
-        <AccordionInfo />
-
-        {/* ---------- 6 ----------  */}
-        <div className="hidden xl:block">
-          <Policy />
-        </div>
       </div>
-    );
-  };
+      {/* ---------- 3 VARIANTS AND SIZE LIST ----------  */}
+
+      {fleg ? (
+        <div>
+          <form className={`flex justify-between font-medium text-sm ${der}`}>
+            <Input
+              required
+              aria-required
+              placeholder="הזן כיתוב ללוחית"
+              type="text"
+              rounded="rounded-full"
+              onChange={(e) => setText(e.target.value)}
+            />
+          </form>
+          <p className="text-m font-bold text-center m-5 ">גודל הטקסט</p>
+          <div className="flex justify-center ">
+            <button onClick={() => setSize("sm")} className="button">
+              קטן
+            </button>
+            <button onClick={() => setSize("lg")} className="button">
+              בינוני
+            </button>
+            <button onClick={() => setSize("2xl")} className="button">
+              גדול
+            </button>
+          </div>
+        </div>
+      ) : (
+        <form className="flex justify-between font-medium text-sm flex flex-col  hebrew-text">
+          <Input
+            required
+            aria-required
+            placeholder="הזן כיתוב שורה 1"
+            type="text"
+            rounded="rounded-full"
+            onChange={(e) => setText(e.target.value)}
+          />
+          <Input
+            required
+            aria-required
+            placeholder="הזן כיתוב שורה 2"
+            type="text"
+            rounded="rounded-full"
+            onChange={(e) => setText2(e.target.value)}
+          />{" "}
+        </form>
+      )}
+
+      <p className="text-m font-bold text-center "> כמות שורות</p>
+      <div className="flex justify-center ">
+        <button onClick={towRow} className="twilio-button">
+          שתי שורות
+        </button>{" "}
+        <button onClick={flege} className="twilio-button">
+          שורה אחת
+        </button>{" "}
+      </div>
+
+      <p className="text-m font-bold text-center ">מיקום השלט</p>
+      <div className="flex justify-center ">
+        <button onClick={() => setDer("hebrew-text-left")} className="button">
+          שמאל
+        </button>
+        <button onClick={() => setDer("hebrew-text-center")} className="button">
+          מרכז
+        </button>
+        <button onClick={() => setDer("hebrew-text")} className="button">
+          ימינה
+        </button>
+      </div>
+
+      <p className="text-m font-bold text-center "> בחר צבע לאותיות</p>
+      <div className="">{renderVariants()}</div>
+      {/* <div className="">{renderSizeList()}</div> */}
+
+      {/*  ---------- 4  QTY AND ADD TO CART BUTTON */}
+      <div className="flex space-x-3.5">
+        <div className="flex items-center justify-center bg-slate-100/70 dark:bg-slate-800/70 px-2 py-3 sm:p-3.5 rounded-full">
+          <NcInputNumber
+            defaultValue={qualitySelected}
+            onChange={setQualitySelected}
+          />
+        </div>
+        <ButtonPrimary
+          className="flex-1 flex-shrink-0"
+          onClick={addToCartAndNotifyAddTocart}
+        >
+          <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
+          <span className="ml-3">Add to cart</span>
+        </ButtonPrimary>
+      </div>
+      {/*  */}
+      <hr className=" 2xl:!my-10 border-slate-200 dark:border-slate-700"></hr>
+      {/*  */}
+      {/* ---------- 5 ----------  */}
+      <AccordionInfo />
+      {/* ---------- 6 ----------  */}
+      <div className="hidden xl:block">
+        <Policy />
+      </div>
+    </div>
+  );
 
   const renderDetailSection = () => {
     return (
@@ -420,18 +483,37 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
                 <img
                   src={LIST_IMAGES_DEMO[0]}
                   className="w-full rounded-2xl object-cover"
-                  alt="product detail 1"
+                  alt="product detail 1 "
                 />
               </div>
-              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-                <input
-                  type="text"
-                  className=" bg-transparent border-b-2 w-[55%] h-13 border-black  text-2xl sm:text-2xl font-semibold"
-                  placeholder="הזן טקסט"
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                />
-              </div>
+              {fleg ? (
+                <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
+                  <input
+                    type="text"
+                    className={` bg-transparent border-b-2 w-[55%] h-13 border-black   font-semibold ${der} text-${size}`}
+                    placeholder="הזן טקסט"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                  />
+                </div>
+              ) : (
+                <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
+                  <input
+                    type="text"
+                    className={`w-20 h-6  bg-transparent border-b-2 w-[55%] h-13 border-black    font-semibold ${der} text-${size}`}
+                    placeholder="הזן טקסט"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                  />
+                  <input
+                    type="text"
+                    className={`w-20 h-6   bg-transparent border-b-2 w-[55%] h-13 border-black font-semibold ${der} text-${size}`}
+                    placeholder="הזן טקסט"
+                    value={text2}
+                    onChange={(e) => setText2(e.target.value)}
+                  />
+                </div>
+              )}
             </div>
           </div>
 
