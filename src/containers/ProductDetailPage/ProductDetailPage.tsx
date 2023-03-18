@@ -82,14 +82,6 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     }
   }, []);
 
-  const loll = () => {
-    // console.log(selectedData);
-    if (selectedData2.prodictimg?.length) {
-      console.log(selectedData2.prodictimg[0]);
-      setLIST_IMAGES_DEMO(selectedData2.prodictimg);
-    }
-  };
-
   const [variantActive, setVariantActive] = React.useState(0);
   const [sizeSelected, setSizeSelected] = React.useState(sizes ? sizes[0] : "");
   const [qualitySelected, setQualitySelected] = React.useState(1);
@@ -475,7 +467,6 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
         show={isOpenModalViewAllReviews}
         onCloseModalViewAllReviews={() => setIsOpenModalViewAllReviews(false)}
       />
-      <button onClick={loll}>111</button>
     </div>
   );
 };
