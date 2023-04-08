@@ -21,7 +21,7 @@ import SectionPromo2 from "components/SectionPromo2";
 import ModalViewAllReviews from "./ModalViewAllReviews";
 import NotifyAddTocart from "components/NotifyAddTocart";
 import product from "images/placeholder-small.png";
-import { Product, PRODUCTS } from "data/data";
+import { Product, PRODUCTS, DEMO_VARIANTS1 } from "data/data";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { addProduct } from "app/mediaRunning/product";
 import Input from "shared/Input/Input";
@@ -30,6 +30,14 @@ import { ArrowSmallRightIcon } from "@heroicons/react/24/solid";
 
 export interface ProductDetailPageProps {
   className?: string;
+}
+
+export interface ExtendedProductDetailPageProps extends Product {
+  DEMO_VARIANTS1: {
+    id: number;
+    name: string;
+    thumbnail: string;
+  }[];
 }
 
 const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
@@ -44,10 +52,16 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
   const [price, setPrice] = useState(100);
   const [fleg, setFleg] = useState(true);
   const [productFromAxios, setProductFromAxios] = useState();
-  const [text, setText] = useState(" ");
-  const [text2, setText2] = useState(" ");
-  const [size, setSize] = useState(" ");
+  const [text, setText] = useState("");
+  const [text2, setText2] = useState("");
+  const [size, setSize] = useState("lg");
   const [der, setDer] = useState("hebrew-text");
+  const [variantActive, setVariantActive] = React.useState(0);
+  const [sizeSelected, setSizeSelected] = React.useState(sizes ? sizes[0] : "");
+  const [qualitySelected, setQualitySelected] = React.useState(1);
+  const [isOpenModalViewAllReviews, setIsOpenModalViewAllReviews] =
+    useState(false);
+  const [slug, setSlug] = useState("");
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -67,6 +81,10 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
         value: _id,
       };
 
+      if (_category) {
+        setSlug(_category);
+      }
+
       axios
         .post(url, data)
         .then((response) => {
@@ -82,12 +100,6 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     }
   }, []);
 
-  const [variantActive, setVariantActive] = React.useState(0);
-  const [sizeSelected, setSizeSelected] = React.useState(sizes ? sizes[0] : "");
-  const [qualitySelected, setQualitySelected] = React.useState(1);
-  const [isOpenModalViewAllReviews, setIsOpenModalViewAllReviews] =
-    useState(false);
-
   const addToCartAndNotifyAddTocart = () => {
     toast.custom(
       (t) => (
@@ -97,6 +109,8 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
           show={t.visible}
           sizeSelected={sizeSelected}
           variantActive={variantActive}
+          name={name}
+          price={price}
         />
       ),
       { position: "top-right", id: "nc-product-notify", duration: 3000 }
@@ -105,8 +119,20 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     if (productFromAxios) {
       const updatedBob = {
         ...(productFromAxios[0] as object),
+        id:
+          (productFromAxios[0] as { id?: string }).id +
+          text +
+          text2 +
+          size +
+          der,
         quantity: qualitySelected,
+        text: text,
+        text2: text2,
+        size: size,
+        der: der,
+        color: DEMO_VARIANTS1[variantActive].name,
       };
+      // console.log("productFromAxios[0]", updatedBob);
       dispatch(addProduct(updatedBob as Product));
     }
   };
@@ -119,7 +145,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     return (
       <div>
         <div className="flex mt-3">
-          {variants.map((variant, index) => (
+          {DEMO_VARIANTS1.map((variant, index) => (
             <div
               key={index}
               onClick={() => setVariantActive(index)}
@@ -154,227 +180,221 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     setSize("lg");
   };
 
-  const renderSectionContent = () => (
-    <div className="space-y-7 2xl:space-y-8">
-      {/* ---------- 1 HEADING ----------  */}
-      <div>
-        <h2 className="text-2xl sm:text-3xl font-semibold">
-          {name ? name : "ללא שם"}
-        </h2>
+  const renderSectionContent = () => {
+    return (
+      <div className="space-y-7 2xl:space-y-8">
+        {/* ---------- 1 HEADING ----------  */}
+        <div>
+          <h2 className="hebrew-text text-2xl sm:text-3xl font-semibold">
+            {name ? name : "ללא שם"}
+          </h2>
 
-        <div className="flex items-center mt-5 space-x-4 sm:space-x-5">
-          {/* <div className="flex text-xl font-semibold">$112.00</div> */}
-          <Prices
-            contentClass="py-1 px-2 md:py-1.5 md:px-3 text-lg font-semibold"
-            price={price ? price : 0}
-          />
+          <div className="hebrew-text flex items-center mt-5 space-x-4 sm:space-x-5">
+            {/* <div className="flex text-xl font-semibold">$112.00</div> */}
+            <Prices
+              contentClass="py-1 px-2 md:py-1.5 md:px-3 text-lg font-semibold"
+              price={price ? price : 10000}
+            />
 
-          <div className="h-7 border-l border-slate-300 dark:border-slate-700"></div>
+            <div className="h-7 border-l border-slate-300 dark:border-slate-700"></div>
 
-          <div className="flex items-center">
-            <a
-              href="#reviews"
-              className="flex items-center text-sm font-medium"
-            >
-              <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />
-              <div className="ml-1.5 flex">
-                <span>4.9</span>
-                <span className="block mx-2">·</span>
-                <span className="text-slate-600 dark:text-slate-400 underline">
-                  142 reviews
-                </span>
+            <div className="flex items-center">
+              <a
+                href="#reviews"
+                className="flex items-center text-sm font-medium"
+              >
+                <StarIcon className="w-5 h-5 pb-[1px] text-yellow-400" />
+                <div className="ml-1.5 flex">
+                  <span>4.9</span>
+                  {/* <span className="block mx-2">·</span>
+                  <span className="text-slate-600 dark:text-slate-400 underline">
+                    142 reviews
+                  </span> */}
+                </div>
+              </a>
+              <span className="hidden sm:block mx-2.5">·</span>
+
+              <div className="hidden sm:flex items-center text-sm">
+                <SparklesIcon className="w-3.5 h-3.5" />
+                <span className="ml-1 leading-none">{status}</span>
               </div>
-            </a>
-            <span className="hidden sm:block mx-2.5">·</span>
-
-            <div className="hidden sm:flex items-center text-sm">
-              <SparklesIcon className="w-3.5 h-3.5" />
-              <span className="ml-1 leading-none">{status}</span>
             </div>
           </div>
         </div>
-      </div>
-      {/* ---------- 3 VARIANTS AND SIZE LIST ----------  */}
+        {/* ---------- 3 VARIANTS AND SIZE LIST ----------  */}
 
-      {fleg ? (
-        <div>
-          <form className={`flex justify-between font-medium text-sm ${der}`}>
+        {fleg ? (
+          <div>
+            <form className={`flex justify-between font-medium text-sm ${der}`}>
+              <Input
+                required
+                aria-required
+                placeholder="הזן כיתוב ללוחית"
+                type="text"
+                rounded="rounded-full"
+                onChange={(e) => setText(e.target.value)}
+              />
+            </form>
+            <div>
+              <p className="text-m font-bold text-center m-2">גודל הטקסט</p>
+              <div className="flex justify-center ">
+                <ButtonPrimary
+                  className="bg-slate-500"
+                  onClick={() => setSize("sm")}
+                >
+                  קטן
+                </ButtonPrimary>
+                <ButtonPrimary
+                  className="bg-slate-500"
+                  onClick={() => setSize("lg")}
+                >
+                  בינוני
+                </ButtonPrimary>
+                <ButtonPrimary
+                  className="bg-slate-500"
+                  onClick={() => setSize("2xl")}
+                >
+                  גדול
+                </ButtonPrimary>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <form className="flex justify-between font-medium text-sm flex flex-col  hebrew-text">
             <Input
               required
               aria-required
-              placeholder="הזן כיתוב ללוחית"
+              placeholder="הזן כיתוב שורה 1"
               type="text"
               rounded="rounded-full"
               onChange={(e) => setText(e.target.value)}
             />
+            <Input
+              required
+              aria-required
+              placeholder="הזן כיתוב שורה 2"
+              type="text"
+              rounded="rounded-full"
+              onChange={(e) => setText2(e.target.value)}
+            />{" "}
           </form>
-          <p className="text-m font-bold text-center m-5 ">גודל הטקסט</p>
-          <div className="flex justify-center ">
-            <button onClick={() => setSize("sm")} className="button">
-              קטן
-            </button>
-            <button onClick={() => setSize("lg")} className="button">
-              בינוני
-            </button>
-            <button onClick={() => setSize("2xl")} className="button">
-              גדול
-            </button>
+        )}
+        {slug === "custom-made" ? (
+          <div>
+            <p className="text-m font-bold text-center  m-2"> כמות שורות</p>
+            <div className="flex justify-center ">
+              <ButtonPrimary className="bg-slate-500" onClick={towRow}>
+                שתי שורות
+              </ButtonPrimary>{" "}
+              <ButtonPrimary className="bg-slate-500" onClick={flege}>
+                שורה אחת
+              </ButtonPrimary>{" "}
+            </div>
           </div>
+        ) : null}
+
+        {slug === "custom-made" ? (
+          <div>
+            <p className="text-m font-bold text-center  m-2">מיקום השלט</p>
+            <div className="flex justify-center ">
+              <ButtonPrimary
+                onClick={() => setDer("hebrew-text-left")}
+                className="bg-slate-500"
+              >
+                שמאל
+              </ButtonPrimary>
+
+              <ButtonPrimary
+                className="bg-slate-500"
+                onClick={() => setDer("hebrew-text-center")}
+              >
+                מרכז
+              </ButtonPrimary>
+
+              <ButtonPrimary
+                className="bg-slate-500"
+                onClick={() => setDer("hebrew-text")}
+              >
+                ימינה
+              </ButtonPrimary>
+            </div>
+          </div>
+        ) : null}
+        <div>
+          <p className="text-m font-bold text-center  m-2"> בחר צבע לאותיות</p>
+          <div className="">{renderVariants()}</div>
         </div>
-      ) : (
-        <form className="flex justify-between font-medium text-sm flex flex-col  hebrew-text">
-          <Input
-            required
-            aria-required
-            placeholder="הזן כיתוב שורה 1"
-            type="text"
-            rounded="rounded-full"
-            onChange={(e) => setText(e.target.value)}
-          />
-          <Input
-            required
-            aria-required
-            placeholder="הזן כיתוב שורה 2"
-            type="text"
-            rounded="rounded-full"
-            onChange={(e) => setText2(e.target.value)}
-          />{" "}
-        </form>
-      )}
 
-      <p className="text-m font-bold text-center "> כמות שורות</p>
-      <div className="flex justify-center ">
-        <button onClick={towRow} className="twilio-button">
-          שתי שורות
-        </button>{" "}
-        <button onClick={flege} className="twilio-button">
-          שורה אחת
-        </button>{" "}
-      </div>
+        {/* <div className="">{renderSizeList()}</div> */}
 
-      <p className="text-m font-bold text-center ">מיקום השלט</p>
-      <div className="flex justify-center ">
-        <button onClick={() => setDer("hebrew-text-left")} className="button">
-          שמאל
-        </button>
-        <button onClick={() => setDer("hebrew-text-center")} className="button">
-          מרכז
-        </button>
-        <button onClick={() => setDer("hebrew-text")} className="button">
-          ימינה
-        </button>
-      </div>
-
-      <p className="text-m font-bold text-center "> בחר צבע לאותיות</p>
-      <div className="">{renderVariants()}</div>
-      {/* <div className="">{renderSizeList()}</div> */}
-
-      {/*  ---------- 4  QTY AND ADD TO CART BUTTON */}
-      <div className="flex space-x-3.5">
-        <div className="flex items-center justify-center bg-slate-100/70 dark:bg-slate-800/70 px-2 py-3 sm:p-3.5 rounded-full">
-          <NcInputNumber
-            defaultValue={qualitySelected}
-            onChange={setQualitySelected}
-          />
+        {/*  ---------- 4  QTY AND ADD TO CART BUTTON */}
+        <div className="flex space-x-3.5">
+          <div className="flex items-center justify-center bg-slate-100/70 dark:bg-slate-800/70 px-2 py-3 sm:p-3.5 rounded-full">
+            <NcInputNumber
+              defaultValue={qualitySelected}
+              onChange={setQualitySelected}
+            />
+          </div>
+          <ButtonPrimary
+            className="flex-1 flex-shrink-0"
+            onClick={addToCartAndNotifyAddTocart}
+          >
+            <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
+            <span className="ml-3">הוסף לעגלת הקניות</span>
+          </ButtonPrimary>
         </div>
-        <ButtonPrimary
-          className="flex-1 flex-shrink-0"
-          onClick={addToCartAndNotifyAddTocart}
-        >
-          <BagIcon className="hidden sm:inline-block w-5 h-5 mb-0.5" />
-          <span className="ml-3">Add to cart</span>
-        </ButtonPrimary>
-      </div>
-      {/*  */}
-      <hr className=" 2xl:!my-10 border-slate-200 dark:border-slate-700"></hr>
-      {/*  */}
-      {/* ---------- 5 ----------  */}
-      <AccordionInfo />
-      {/* ---------- 6 ----------  */}
-      <div className="hidden xl:block">
-        <Policy />
-      </div>
-    </div>
-  );
-
-  const renderDetailSection = () => {
-    return (
-      <div className="">
-        <h2 className="text-2xl font-semibold">Product Details</h2>
-        <div className="prose prose-sm sm:prose dark:prose-invert sm:max-w-4xl mt-7">
-          <p>
-            The patented eighteen-inch hardwood Arrowhead deck --- finely
-            mortised in, makes this the strongest and most rigid canoe ever
-            built. You cannot buy a canoe that will afford greater satisfaction.
-          </p>
-          <p>
-            The St. Louis Meramec Canoe Company was founded by Alfred Wickett in
-            1922. Wickett had previously worked for the Old Town Canoe Co from
-            1900 to 1914. Manufacturing of the classic wooden canoes in Valley
-            Park, Missouri ceased in 1978.
-          </p>
-          <ul>
-            <li>Regular fit, mid-weight t-shirt</li>
-            <li>Natural color, 100% premium combed organic cotton</li>
-            <li>
-              Quality cotton grown without the use of herbicides or pesticides -
-              GOTS certified
-            </li>
-            <li>Soft touch water based printed in the USA</li>
-          </ul>
+        {/*  */}
+        <hr className=" 2xl:!my-10 border-slate-200 dark:border-slate-700"></hr>
+        {/*  */}
+        {/* ---------- 5 ----------  */}
+        <AccordionInfo />
+        {/* ---------- 6 ----------  */}
+        <div className="hidden xl:block">
+          <Policy />
         </div>
       </div>
     );
   };
 
-  const renderReviews = () => {
+  const renderDetailSection = () => {
     return (
       <div className="">
-        {/* HEADING */}
-        <h2 className="text-2xl font-semibold flex items-center">
-          <StarIcon className="w-7 h-7 mb-0.5" />
-          <span className="ml-1.5"> 4,87 · 142 Reviews</span>
-        </h2>
+        <h2 className="hebrew-text text-2xl font-semibold">פרטי המוצר</h2>
+        <div className=" hebrew-text prose prose-sm sm:prose dark:prose-invert sm:max-w-4xl mt-7">
+          <p>
+            השלטים שמייצר העסק עשויים מאלומיניום, חומר קל משקל וחזק, המתאים
+            במיוחד לייצור שלטים עמידים ועמידים למזג האקלים השונה. כמו כן,
+            המוצרים עשויים מחומרים איכותיים ועמידים נוספים כמו דבק עמיד למים
+            ועמיד לקרני UV, המסייעים להארכת חיי השימוש של השלטים ולשמירה על
+            המראה המקצועי והאטרקטיבי שלהם. השימוש בחומרים איכותיים ועמידים מבטיח
+            ללקוחות של העסק מוצרים איכותיים ועמידים שיישארו יפים ומשמשים לאורך
+            זמן.
+          </p>
+          <p>
+            השלטים שמייצר העסק עשויים מאלומיניום, חומר קל משקל וחזק, המתאים
+            במיוחד לייצור שלטים עמידים ועמידים למזג האקלים השונה. כמו כן,
+            המוצרים עשויים מחומרים איכותיים ועמידים נוספים כמו דבק עמיד למים
+            ועמיד לקרני UV, המסייעים להארכת חיי השימוש של השלטים ולשמירה על
+            המראה המקצועי והאטרקטיבי שלהם. השימוש בחומרים איכותיים ועמידים מבטיח
+            ללקוחות של העסק מוצרים איכותיים ועמידים שיישארו יפים ומשמשים לאורך
+            זמן.
+          </p>
+          <ul>
+            <li>
+              אנו מייצרים שלטים באלומיניום בהבלטה לשימושים שונים כגון שלטים
+              לבתים, חנויות, משרדים ועסקים, ועוד.
+            </li>
+            <li>
+              אנו מספקים שירות מותאם אישית ומקצועי ליצירת שלטים באלומיניום
+              בהבלטה מותאמים לצרכי הלקוחות שלנו.
+            </li>
 
-        {/* comment */}
-        <div className="mt-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-11 gap-x-28">
-            <ReviewItem />
-            <ReviewItem
-              data={{
-                comment: `I love the charcoal heavyweight hoodie. Still looks new after plenty of washes. 
-                  If you’re unsure which hoodie to pick.`,
-                date: "December 22, 2021",
-                name: "Stiven Hokinhs",
-                starPoint: 5,
-              }}
-            />
-            <ReviewItem
-              data={{
-                comment: `The quality and sizing mentioned were accurate and really happy with the purchase. Such a cozy and comfortable hoodie. 
-                Now that it’s colder, my husband wears his all the time. I wear hoodies all the time. `,
-                date: "August 15, 2022",
-                name: "Gropishta keo",
-                starPoint: 5,
-              }}
-            />
-            <ReviewItem
-              data={{
-                comment: `Before buying this, I didn't really know how I would tell a "high quality" sweatshirt, but after opening, I was very impressed. 
-                The material is super soft and comfortable and the sweatshirt also has a good weight to it.`,
-                date: "December 12, 2022",
-                name: "Dahon Stiven",
-                starPoint: 5,
-              }}
-            />
-          </div>
-
-          <ButtonSecondary
-            onClick={() => setIsOpenModalViewAllReviews(true)}
-            className="mt-10 border border-slate-300 dark:border-slate-700 "
-          >
-            Show me all 142 reviews
-          </ButtonSecondary>
+            <li>
+              אנו משתמשים במגוון חומרים איכותיים ועמידים כמו אלומיניום, דבק עמיד
+              למים וקרני UV, ועוד. החומרים שאנו משתמשים בהם מבטיחים ללקוחות שלנו
+              מוצרים איכותיים ועמידים.
+            </li>
+          </ul>
         </div>
       </div>
     );
@@ -389,14 +409,15 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
           <div className="w-full lg:w-[55%] ">
             {/* HEADING */}
             <div className="relative">
-              <div className="aspect-w-16 aspect-h-16">
+              <div className="aspect-w-16 lg:aspect-h-16 aspect-h-8  ">
                 <img
                   src={LIST_IMAGES_DEMO[0]}
                   className="w-full rounded-2xl object-cover"
                   alt="product detail 1 "
                 />
               </div>
-              {fleg ? (
+
+              {fleg && slug === "custom-made" ? (
                 <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
                   <input
                     type="text"
@@ -406,7 +427,9 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
                     onChange={(e) => setText(e.target.value)}
                   />
                 </div>
-              ) : (
+              ) : null}
+
+              {!fleg && slug === "custom-made" ? (
                 <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center">
                   <input
                     type="text"
@@ -423,7 +446,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
                     onChange={(e) => setText2(e.target.value)}
                   />
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -442,23 +465,6 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
           {renderDetailSection()}
 
           <hr className="border-slate-200 dark:border-slate-700" />
-
-          {renderReviews()}
-
-          <hr className="border-slate-200 dark:border-slate-700" />
-
-          {/* OTHER SECTION */}
-          <SectionSliderProductCard
-            heading="Customers also purchased"
-            subHeading=""
-            headingFontClassName="text-2xl font-semibold"
-            headingClassName="mb-10 text-neutral-900 dark:text-neutral-50"
-          />
-
-          {/* SECTION */}
-          <div className="pb-20 xl:pb-28 lg:pt-14">
-            <SectionPromo2 />
-          </div>
         </div>
       </main>
 

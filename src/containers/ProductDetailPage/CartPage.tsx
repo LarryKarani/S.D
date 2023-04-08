@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import { updateProduct } from "app/mediaRunning/product";
 import TotalPrice from "components/TotalPrice";
 
-const CartPage = () => {
+const CartPage = (props: any) => {
   const [quantity, setQuantity] = useState(1); // initialize state with default quantity of 1
 
   function handleQuantityChange(event: { target: { value: string } }) {
@@ -56,6 +56,7 @@ const CartPage = () => {
     if (selectedData2) {
       console.log("selectedData2", selectedData2);
     }
+
     return (
       <div
         key={index}
@@ -123,70 +124,27 @@ const CartPage = () => {
                         strokeLinejoin="round"
                       />
                     </svg>
-
-                    <span>{`Black`}</span>
+                    <div>
+                      {item.color ? <span>{item.color}</span> : null}
+                      <br />
+                      {item.size ? <span>{item.size}</span> : null}
+                    </div>
                   </div>
                   <span className="mx-4 border-l border-slate-200 dark:border-slate-700 "></span>
-                  <div className="flex items-center space-x-1.5">
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M21 9V3H15"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M3 15V21H9"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M21 3L13.5 10.5"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M10.5 13.5L3 21"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-
-                    <span>{`2XL`}</span>
+                  <div className=" hebrew-text flex items-center space-x-1.5">
+                    {item.text && item.text2 ? (
+                      <span className="hebrew-text">
+                        {" "}
+                        שורה1: {item.text} <br /> שורה2:{item.text2}{" "}
+                      </span>
+                    ) : null}
+                    {item.text && !item.text2 ? (
+                      <span className="hebrew-text"> {item.text} </span>
+                    ) : null}
                   </div>
                 </div>
 
                 <div className="mt-3 flex justify-between w-full sm:hidden relative">
-                  {/* <form onSubmit={() => handleSubmit(item)}> */}
-                  {/* <select
-                    name="qty"
-                    id="qty"
-                    // value={quantity}
-                    className="form-select text-sm rounded-md py-1 border-slate-200 dark:border-slate-700 relative z-10 dark:bg-slate-800 "
-                    onChange={handleQuantityChange}
-                  >
-                    <option value="" disabled selected>
-                      בחר כמות
-                    </option>
-
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                  </select> */}
-
-                  {/* <button type="submit">Submit</button> */}
-                  {/* </form> */}
                   <NcInputNumber
                     defaultValue={quantity}
                     item={item}
@@ -198,14 +156,6 @@ const CartPage = () => {
                     price={price}
                   />
                 </div>
-              </div>
-
-              <div className="hidden sm:block text-center relative">
-                <NcInputNumber
-                  defaultValue={quantity}
-                  item={item}
-                  className="relative z-10"
-                />
               </div>
 
               <div className="hidden flex-1 sm:flex justify-end">
@@ -228,102 +178,109 @@ const CartPage = () => {
       </div>
     );
   };
-  return (
-    <div className="nc-CartPage">
-      <Helmet>
-        <title>Shopping Cart || Ciseco Ecommerce Template</title>
-      </Helmet>
 
-      <main className="container py-16 lg:pb-28 lg:pt-20 ">
-        <div className="mb-12 sm:mb-16">
-          <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold ">
-            עגלת הקניות
-          </h2>
-          <div className="block mt-3 sm:mt-5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-400">
-            <Link to={"/#"} className="">
-              Homepage
-            </Link>
-            <span className="text-xs mx-1 sm:mx-1.5">/</span>
-            <Link to={"/#"} className="">
-              Clothing Categories
-            </Link>
-            <span className="text-xs mx-1 sm:mx-1.5">/</span>
-            <span className="underline">Shossspping Cart</span>
+  if (props.sum === "sumOrder") {
+    return (
+      <div className="w-full lg:w-[60%] xl:w-[55%] divide-y divide-slate-200 dark:divide-slate-700 ">
+        {selectedData2 ? selectedData2.map(renderProduct) : null}
+      </div>
+    );
+  } else {
+    return (
+      <div className="nc-CartPage">
+        <Helmet>
+          <title>Shopping Cart || Ciseco Ecommerce Template</title>
+        </Helmet>
+
+        <main className="container py-16 lg:pb-28 lg:pt-20 ">
+          <div className="mb-12 sm:mb-16">
+            <h2 className="hebrew-text block text-2xl sm:text-3xl lg:text-4xl font-semibold ">
+              עגלת הקניות
+            </h2>
+            <div className=" block mt-3 sm:mt-5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-400">
+              <span className="underline">עגלת קניות</span>
+              <span className=" text-xs mx-1 sm:mx-1.5">/</span>
+              <Link to={"/#"} className="">
+                דף הבית
+              </Link>
+            </div>
           </div>
-        </div>
 
-        <hr className="border-slate-200 dark:border-slate-700 my-10 xl:my-12" />
-        <div className="flex flex-col lg:flex-row">
-          <div className="w-full lg:w-[60%] xl:w-[55%] divide-y divide-slate-200 dark:divide-slate-700 ">
-            {selectedData2 ? selectedData2.map(renderProduct) : null}
-          </div>
-          <div className="border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-700 my-10 lg:my-0 lg:mx-10 xl:mx-16 2xl:mx-20 flex-shrink-0"></div>
-          <div className="flex-1">
-            <div className="sticky top-28">
-              <h3 className="text-lg font-semibold ">Order Summary</h3>
-              <TotalPrice />
+          <hr className="border-slate-200 dark:border-slate-700 my-10 xl:my-12" />
+          <div className="flex flex-col lg:flex-row">
+            <div className="w-full lg:w-[60%] xl:w-[55%] divide-y divide-slate-200 dark:divide-slate-700 ">
+              {selectedData2 ? selectedData2.map(renderProduct) : null}
+            </div>
+            <div className="border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-700 my-10 lg:my-0 lg:mx-10 xl:mx-16 2xl:mx-20 flex-shrink-0"></div>
+            <div className="flex-1">
+              <div className="sticky top-28">
+                <h3 className="text-lg font-semibold hebrew-text ">
+                  סיכום הזמנה
+                </h3>
+                <TotalPrice />
 
-              <ButtonPrimary href="/checkout" className="mt-8 w-full">
-                Checkout
-              </ButtonPrimary>
-              <div className="mt-5 text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center">
-                <p className="block relative pl-5">
-                  <svg
-                    className="w-4 h-4 absolute -left-1 top-0.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path
-                      d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 8V13"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M11.9945 16H12.0035"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  Learn more{` `}
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="##"
-                    className="text-slate-900 dark:text-slate-200 underline font-medium"
-                  >
-                    Taxes
-                  </a>
-                  <span>
-                    {` `}and{` `}
-                  </span>
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="##"
-                    className="text-slate-900 dark:text-slate-200 underline font-medium"
-                  >
-                    Shipping
-                  </a>
-                  {` `} infomation
-                </p>
+                <ButtonPrimary href="/checkout" className="mt-8 w-full">
+                  סיום הזמנה
+                </ButtonPrimary>
+                <div className="mt-5 text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center">
+                  <p className="block relative pl-5">
+                    <svg
+                      className="w-4 h-4 absolute -left-1 top-0.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M12 8V13"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M11.9945 16H12.0035"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    Learn more{` `}
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="##"
+                      className="text-slate-900 dark:text-slate-200 underline font-medium"
+                    >
+                      Taxes
+                    </a>
+                    <span>
+                      {` `}and{` `}
+                    </span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="##"
+                      className="text-slate-900 dark:text-slate-200 underline font-medium"
+                    >
+                      Shipping
+                    </a>
+                    {` `} infomation
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
-    </div>
-  );
+        </main>
+      </div>
+    );
+  }
 };
 
 export default CartPage;

@@ -4,45 +4,44 @@ import { FC } from "react";
 
 const DEMO_DATA = [
   {
-    name: "Description",
+    name: "תיאור",
     content:
-      "Fashion is a form of self-expression and autonomy at a particular period and place and in a specific context, of clothing, footwear, lifestyle, accessories, makeup, hairstyle, and body posture.",
+      "מוצרים שמייצר העסק הם שלטים מאלומיניום בהבלטה, המיועדים לשימוש במגוון תחומי שיווק, פרסום וסימון. השלטים מיוצרים בגדלים וגוונים שונים ומעוצבים באופן מודרני ואטרקטיבי על מנת לקדם מותגים ולהציג מידע לקהל הרחב.",
   },
   {
-    name: "Fabric + Care",
+    name: "חומרי הגלם",
     content: `<ul class="list-disc list-inside leading-7">
-    <li>Made from a sheer Belgian power micromesh.</li>
+    <li>שלטים שמייצר העסק עשויים מאלומיניום, חומר קל משקל וחזק, המתאים במיוחד לייצור שלטים עמידים ועמידים למזג האקלים השונה</li>
     <li>
-    74% Polyamide (Nylon) 26% Elastane (Spandex)
+    המוצרים עשויים מחומרים איכותיים ועמידים נוספים כמו דבק עמיד למים ועמיד לקרני UV, המסייעים להארכת חיי השימוש של השלטים ולשמירה על המראה המקצועי והאטרקטיבי שלהם. 
     </li>
     <li>
-    Adjustable hook & eye closure and straps
+    השימוש בחומרים איכותיים ועמידים מבטיח ללקוחות של העסק מוצרים איכותיים ועמידים שיישארו יפים ומשמשים לאורך זמן.
     </li>
-    <li>
-    Hand wash in cold water, dry flat
-    </li>
+ 
   </ul>`,
   },
 
   {
-    name: "How it Fits",
+    name: "למה השלטים מתאימים",
     content:
-      "Use this as a guide. Preference is a huge factor — if you're near the top of a size range and/or prefer more coverage, you may want to size up.",
+      "מוצרים שמייצר העסק הם שלטים מאלומיניום בהבלטה, המיועדים לשימוש במגוון תחומי שיווק, פרסום וסימון. השלטים מיוצרים בגדלים וגוונים שונים ומעוצבים באופן מודרני ואטרקטיבי על מנת לקדם מותגים ולהציג מידע לקהל הרחב.",
   },
   {
-    name: "FAQ",
+    name: "שאלות נפוצות",
     content: `
     <ul class="list-disc list-inside leading-7">
-    <li>All full-priced, unworn items, with tags attached and in their original packaging are eligible for return or exchange within 30 days of placing your order.</li>
+    <li>שאלה: האם ניתן להזמין שלטים מותאמים אישית?
+    תשובה: כן, אנו מספקים שירות מותאם אישית ומקצועי ליצירת שלטים באלומיניום בהבלטה מותאמים לצרכי הלקוחות שלנו.</li>
     <li>
-    Please note, packs must be returned in full. We do not accept partial returns of packs.
+    שאלה: מה המחיר של השלטים שלכם?
+    תשובה: המחירים שלנו משתנים בהתאם לגודל, העיצוב, והכמות של השלטים המוזמנים. אנו מציעים מחירים תחרותיים ומצויידים בצוות מומחים המתאימים את המחירים לצרכי הלקוח.
     </li>
     <li>
-    Want to know our full returns policies? Here you go.
+    שאלה: איזה חומרים אתם משתמשים בייצור השלטים שלכם?
+תשובה: אנו משתמשים במגוון חומרים איכותיים ועמידים כמו אלומיניום, דבק עמיד למים וקרני UV, ועוד. החומרים שאנו משתמשים בהם מבטיחים ללקוחות שלנו מוצרים איכותיים ועמידים.
     </li>
-    <li>
-    Want more info about shipping, materials or care instructions? Here!
-    </li>
+  
   </ul>
     `,
   },
@@ -54,7 +53,7 @@ interface Props {
 }
 
 const AccordionInfo: FC<Props> = ({
-  panelClassName = "p-4 pt-3 last:pb-0 text-slate-600 text-sm dark:text-slate-300 leading-6",
+  panelClassName = "hebrew-text p-4 pt-3 last:pb-0 text-slate-600 text-sm dark:text-slate-300 leading-6",
   data = DEMO_DATA,
 }) => {
   return (

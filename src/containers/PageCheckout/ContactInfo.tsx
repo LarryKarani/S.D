@@ -7,11 +7,44 @@ import Input from "shared/Input/Input";
 
 interface Props {
   isActive: boolean;
+  Alert: boolean;
   onOpenActive: () => void;
   onCloseActive: () => void;
+  contactInfo: { name: string; email: string; phone: string };
+  setContactInfo: React.Dispatch<
+    React.SetStateAction<{ name: string; email: string; phone: string }>
+  >;
 }
 
-const ContactInfo: FC<Props> = ({ isActive, onCloseActive, onOpenActive }) => {
+const ContactInfo: FC<Props> = ({
+  isActive,
+  onCloseActive,
+  onOpenActive,
+  contactInfo,
+  setContactInfo,
+  Alert,
+}) => {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setContactInfo((prevState) => ({
+      ...prevState,
+      name: event.target.value,
+    }));
+  };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setContactInfo((prevState) => ({
+      ...prevState,
+      email: event.target.value,
+    }));
+  };
+
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setContactInfo((prevState) => ({
+      ...prevState,
+      phone: event.target.value,
+    }));
+  };
+
   const renderAccount = () => {
     return (
       <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden z-0">
@@ -48,7 +81,7 @@ const ContactInfo: FC<Props> = ({ isActive, onCloseActive, onOpenActive }) => {
           </span>
           <div className="sm:ml-8">
             <h3 className=" text-slate-700 dark:text-slate-300 flex ">
-              <span className="uppercase tracking-tight">CONTACT INFO</span>
+              <span className="uppercase tracking-tight">פרטי לקוח</span>
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
@@ -63,47 +96,65 @@ const ContactInfo: FC<Props> = ({ isActive, onCloseActive, onOpenActive }) => {
                 />
               </svg>
             </h3>
-            <div className="font-semibold mt-1 text-sm">
+            {/* <div className="font-semibold mt-1 text-sm">
               <span className="">Enrico Smith</span>
               <span className="ml-3 tracking-tighter">+855 - 666 - 7744</span>
-            </div>
+            </div> */}
           </div>
+
           <ButtonSecondary
             sizeClass="py-2 px-4 "
             fontSize="text-sm font-medium"
             className="bg-slate-50 dark:bg-slate-800 mt-5 sm:mt-0 sm:ml-auto !rounded-lg"
             onClick={() => onOpenActive()}
           >
-            Change
+            ערוך
           </ButtonSecondary>
         </div>
         <div
-          className={`border-t border-slate-200 dark:border-slate-700 px-6 py-7 space-y-4 sm:space-y-6 ${
+          className={`hebrew-text border-t border-slate-200 dark:border-slate-700 px-6 py-7 space-y-4 sm:space-y-6 ${
             isActive ? "block" : "hidden"
           }`}
         >
-          <div className="flex justify-between flex-wrap items-baseline">
-            <h3 className="text-lg font-semibold">Contact infomation</h3>
-            <span className="block text-sm my-1 md:my-0">
+          <div className="he flex justify-between flex-wrap items-baseline">
+            <h3 className="text-lg font-semibold">פרטי איש הקשר</h3>
+            {/* <span className="block text-sm my-1 md:my-0">
               Do not have an account?{` `}
               <a href="##" className="text-primary-500 font-medium">
                 Log in
               </a>
-            </span>
+            </span> */}
           </div>
           <div className="max-w-lg">
-            <Label className="text-sm">Your phone number</Label>
-            <Input className="mt-1.5" defaultValue={"+808 xxx"} type={"tel"} />
+            <Label className="text-sm"> כתובת המייל </Label>
+            <Input
+              className="mt-1.5 "
+              defaultValue={"05 xxx"}
+              type={"tel"}
+              value={contactInfo.email}
+              onChange={handleEmailChange}
+            />
           </div>
+
           <div className="max-w-lg">
-            <Label className="text-sm">Email address</Label>
-            <Input className="mt-1.5" type={"email"} />
+            <Label className="text-sm">מספר הפלאפון</Label>
+            <Input
+              className="mt-1.5 "
+              defaultValue={"slti@ xxx"}
+              type={"email"}
+              value={contactInfo.phone}
+              onChange={handlePhoneChange}
+            />
           </div>
+          {Alert ? (
+            <p style={{ color: "red" }}>נא למלא את הפרטים הדרושים </p>
+          ) : null}
+
           <div>
             <Checkbox
               className="!text-sm"
               name="uudai"
-              label="Email me news and offers"
+              label="סמן לקבלת עידכונים"
               defaultChecked
             />
           </div>
@@ -114,14 +165,14 @@ const ContactInfo: FC<Props> = ({ isActive, onCloseActive, onOpenActive }) => {
               className="sm:!px-7 shadow-none"
               onClick={() => onCloseActive()}
             >
-              Save and next to Shipping
+              שמור ועבור למשלוח
             </ButtonPrimary>
-            <ButtonSecondary
+            {/* <ButtonSecondary
               className="mt-3 sm:mt-0 sm:ml-3"
               onClick={() => onCloseActive()}
             >
               Cancel
-            </ButtonSecondary>
+            </ButtonSecondary> */}
           </div>
         </div>
       </div>

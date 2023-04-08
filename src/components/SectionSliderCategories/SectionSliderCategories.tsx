@@ -13,6 +13,7 @@ export interface CardCategoryData {
   desc: string;
   img: string;
   color?: string;
+  link?: string;
 }
 const CATS: CardCategoryData[] = [
   {
@@ -20,24 +21,28 @@ const CATS: CardCategoryData[] = [
     desc: "20+ מדינות",
     img: department1Png,
     color: "bg-indigo-100",
+    link: "/save-the-date",
   },
   {
-    name: "מתנה לגבר",
+    name: "למשאיות",
     desc: "10+ ",
     img: department2Png,
     color: "bg-slate-100",
+    link: "/truck",
   },
   {
-    name: "שלטי הכוונה",
+    name: "כניסה לבית ",
     desc: "34+ ",
     img: department3Png,
     color: "bg-sky-100",
+    link: "/houses-signs",
   },
   {
-    name: "שלטים בהבלטה",
+    name: "למספרות",
     desc: "12+ categories",
     img: department4Png,
     color: "bg-orange-100",
+    link: "/hairdressers-signs",
   },
 ];
 export interface SectionSliderCategoriesProps {
@@ -109,6 +114,7 @@ const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
                   name={item.name}
                   desc={item.desc}
                   bgClass={item.color}
+                  to={item.link}
                 />
               </li>
             ))}

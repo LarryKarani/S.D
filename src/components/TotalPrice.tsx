@@ -22,21 +22,21 @@ const TotalPrice: FC<PricesProps> = ({ className = "", price = 30 }) => {
   return (
     <div className="mt-7 text-sm text-slate-500 dark:text-slate-400 divide-y divide-slate-200/70 dark:divide-slate-700/80">
       <div className="flex justify-between pb-4">
-        <span>Subtotal</span>
         <span className="font-semibold text-slate-900 dark:text-slate-200">
-          ${totalPrice}
+          ₪{totalPrice}
         </span>
+        <span>מחיר</span>
       </div>
-      <div className="flex justify-between py-4">
-        <span>Shpping estimate</span>
+      <div className=" flex justify-between py-4">
         <span className="font-semibold text-slate-900 dark:text-slate-200">
-          $30.00
+          ₪30.00
         </span>
+        <span>עלות משלוח </span>
       </div>
 
       <div className="flex justify-between font-semibold text-slate-900 dark:text-slate-200 text-base pt-4">
-        <span>Order total</span>
-        <span> ${totalPrice + 30}</span>
+        <span> ₪{totalPrice + 30}</span>
+        <span>מחיר סופי</span>
       </div>
     </div>
   );

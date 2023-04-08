@@ -291,7 +291,7 @@ export const NAVIGATION_DEMO_1: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/houses-signs",
-    name: "שלטים לבית ",
+    name: "כניסה לבית ",
   },
   {
     id: ncNanoId(),

@@ -23,19 +23,17 @@ const SectionPromo2: FC<SectionPromo2Props> = ({ className = "lg:pt-10" }) => {
 
         <div className="lg:w-[45%] max-w-lg relative">
           <Logo className="w-28" />
-          <h2 className="font-semibold text-3xl sm:text-4xl xl:text-5xl 2xl:text-6xl mt-6 sm:mt-10 !leading-[1.13] tracking-tight">
-            הצעה מיוחדת,
-            <br />
+          <h2 className="hebrew-text font-semibold text-3xl sm:text-4xl xl:text-5xl 2xl:text-6xl mt-6 sm:mt-10 !leading-[1.13] tracking-tight">
             שלטים בהתאמה אישית
           </h2>
-          <span className="block mt-6 text-slate-500 dark:text-slate-400">
+          <span className=" hebrew-text block mt-6 text-slate-500 dark:text-slate-400">
             כאן תוכלו לעצב את השלט בהתאמה אישית, הלוחות עצמם עשויית מגרמניה
             באיכיות תקן הגבוהות של אירופה
           </span>
           <div className="flex space-x-2 sm:space-x-5 mt-6 sm:mt-12">
             <ButtonPrimary
               href="/custom-made"
-              className="dark:bg-slate-200 dark:text-slate-900"
+              className=" hebrew-text dark:bg-slate-200 dark:text-slate-900"
             >
               גלה עוד
             </ButtonPrimary>

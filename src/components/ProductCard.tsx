@@ -247,8 +247,6 @@ const ProductCard: FC<ProductCardProps> = ({
         className={`nc-ProductCard relative flex flex-col bg-transparent ${className}`}
         data-nc-id="ProductCard"
       >
-        <Link to={"/product-detail"} className="absolute inset-0"></Link>
-
         <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
           <Link
             to={`/product-detail/${category}/${id}`}
@@ -300,11 +298,13 @@ const ProductCard: FC<ProductCardProps> = ({
 
           <div>
             <h2
-              className={`nc-ProductCard__title text-base font-semibold transition-colors`}
+              className={` hebrew-text  nc-ProductCard__title text-base font-semibold transition-colors`}
             >
               {name}
             </h2>
-            <p className={`text-sm text-slate-500 dark:text-slate-400 mt-1 `}>
+            <p
+              className={`hebrew-text text-sm text-slate-500 dark:text-slate-400 mt-1 `}
+            >
               {description}
             </p>
           </div>

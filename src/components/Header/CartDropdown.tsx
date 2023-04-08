@@ -5,8 +5,15 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import ButtonPrimary from "shared/Button/ButtonPrimary";
 import ButtonSecondary from "shared/Button/ButtonSecondary";
+import { useAppSelector } from "../../app/hooks";
 
 export default function CartDropdown() {
+  const selectedData2 = useAppSelector((state) => state.products);
+
+  const totalSum = selectedData2.reduce((total, product) => {
+    return total + product.quantity;
+  }, 0);
+
   const renderProduct = (item: Product, index: number, close: () => void) => {
     const { name, price, image } = item;
     return (
@@ -69,7 +76,7 @@ export default function CartDropdown() {
                  group w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative`}
           >
             <div className="w-3.5 h-3.5 flex items-center justify-center bg-primary-500 absolute top-1.5 right-1.5 rounded-full text-[10px] leading-none text-white font-medium">
-              <span className="mt-[1px]">3</span>
+              <span className="mt-[1px]">{totalSum}</span>
             </div>
             <svg
               className="w-6 h-6"

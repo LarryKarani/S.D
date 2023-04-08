@@ -26,7 +26,7 @@ function PageHome() {
       </Helmet>
 
       {/* SECTION HERO */}
-      <SectionHero2 />
+      <SectionPromo2 />
 
       <div className="container relative space-y-24 my-24 lg:space-y-32 lg:my-32">
         {/* SECTION */}
@@ -47,7 +47,8 @@ function PageHome() {
         />
 
         {/*  */}
-        <SectionPromo2 className="hebrew-text" />
+
+        <SectionHero2 />
 
         {/* SECTION 3 */}
         {/* <SectionSliderLargeProduct cardStyle="style2" /> */}

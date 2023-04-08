@@ -9,6 +9,7 @@ export interface CardCategory2Props {
   featuredImage?: string;
   name: string;
   desc: string;
+  to?: string;
 }
 
 const CardCategory2: FC<CardCategory2Props> = ({
@@ -18,10 +19,11 @@ const CardCategory2: FC<CardCategory2Props> = ({
   featuredImage = ".",
   name,
   desc,
+  to,
 }) => {
   return (
     <Link
-      to={"/page-collection"}
+      to={`/page-collection${to}`}
       className={`nc-CardCategory2 ${className}`}
       data-nc-id="CardCategory2"
     >

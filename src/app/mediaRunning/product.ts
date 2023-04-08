@@ -17,7 +17,6 @@ export const productSlice = createSlice({
         localStorage.setItem("state", serializedState);
       } else{
         console.log("poi", action.payload);
-
         const index = state.findIndex(p => p.id === action.payload.id);
         const updatedBob = {
           ...productExists,
@@ -26,15 +25,9 @@ export const productSlice = createSlice({
         };
       
         state[index] = updatedBob;
-
-   
         const serializedState = JSON.stringify(state);
         localStorage.setItem("state", serializedState);
-
       }
-
- 
-
     },
     getProduct: (state) => {
    const productsStateString = localStorage.getItem("state");

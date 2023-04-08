@@ -1,4 +1,5 @@
 import { productImgs } from "contains/fakeData";
+import productVariantImg1 from "images/products/v1.jpg";
 import productVariantImg2 from "images/products/v2.jpg";
 import productVariantImg3 from "images/products/v3.jpg";
 import productVariantImg4 from "images/products/v4.jpg";
@@ -24,7 +25,7 @@ export interface ProductVariant {
   featuredImage: string;
 }
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   price: number;
   quantity: number
@@ -39,7 +40,13 @@ export interface Product {
   allOfSizes?: string[];
   prodictimg?: string[];
   status?: "New in" | "limited edition" | "Sold Out" | "50% Discount";
+  text?:string;
+  text2?:string;
+  size?:string;
+  der?:string;
+  color?:string;
 }
+
 
 const DEMO_VARIANTS: ProductVariant[] = [
   {
@@ -72,6 +79,50 @@ const DEMO_VARIANTS: ProductVariant[] = [
     thumbnail: productVariantImg5,
     featuredImage: productImgs[4],
   },
+  {
+    id: 6,
+    name: "dNatural",
+    thumbnail: productVariantImg5,
+    featuredImage: productImgs[4],
+   
+  }
+];
+export const DEMO_VARIANTS1 = [
+  {
+    id: 1,
+    name: "לבן",
+    thumbnail: productVariantImg6,
+ 
+  },
+  {
+    id: 2,
+    name: "צהוב",
+    thumbnail: productVariantImg2,
+    
+  },
+  {
+    id: 3,
+    name: "שחור",
+    thumbnail: productVariantImg3,
+  
+  },
+  {
+    id: 4,
+    name: "כחול",
+    thumbnail: productVariantImg4,
+    
+  },
+  {
+    id: 5,
+    name: "סגול",
+    thumbnail: productVariantImg5,
+   
+  },{
+    id: 6,
+    name: "אדום",
+    thumbnail: productVariantImg1,
+   
+  }
 ];
 const DEMO_VARIANT_COLORS: ProductVariant[] = [
   {
@@ -104,11 +155,17 @@ const DEMO_VARIANT_COLORS: ProductVariant[] = [
     color: "bg-green-400",
     featuredImage: productImgs[4],
   },
+  {
+    id: 6,
+    name: "dNatural",
+    color: "bg-green-400",
+    featuredImage: productImgs[4],
+  },
 ];
 
 export const PRODUCTS: Product[] = [
   {
-    id: 1,
+    id: "1",
     name: "Rey Nylon Backpack",
     quantity:1,
     description: "Brown cockroach wings",
@@ -124,7 +181,7 @@ export const PRODUCTS: Product[] = [
     status: "New in",
   },
   {
-    id: 2,
+    id: "2",
     quantity:1,
     name: 'Round Buckle 1" Belt',
     description: "Classic green",
@@ -138,7 +195,7 @@ export const PRODUCTS: Product[] = [
     status: "50% Discount",
   },
   {
-    id: 3,
+    id: "3",
     name: "Waffle Knit Beanie",
     description: "New blue aqua",
     quantity:1,
@@ -153,7 +210,7 @@ export const PRODUCTS: Product[] = [
     allOfSizes: ["S", "M", "L", "XL", "2XL", "3XL"],
   },
   {
-    id: 4,
+    id: "4",
     name: "Travel Pet Carrier",
     description: "Dark pink 2023",
     quantity:1,
@@ -167,7 +224,7 @@ export const PRODUCTS: Product[] = [
     status: "Sold Out",
   },
   {
-    id: 5,
+    id: "5",
     name: "Leather Gloves",
     description: "Perfect mint green",
     quantity:1,
@@ -182,7 +239,7 @@ export const PRODUCTS: Product[] = [
     link: "/product-detail/",
   },
   {
-    id: 6,
+    id: "6",
     name: "Hoodie Sweatshirt",
     description: "New design 2023",
     quantity:1,
@@ -195,7 +252,7 @@ export const PRODUCTS: Product[] = [
     link: "/product-detail/",
   },
   {
-    id: 7,
+    id: "7",
     name: "Wool Cashmere Jacket",
     quantity:1,
     description: "Matte black",
@@ -209,7 +266,7 @@ export const PRODUCTS: Product[] = [
     status: "New in",
   },
   {
-    id: 8,
+    id: "8",
     name: "Ella Leather Tote",
     description: "Cream pink",
     quantity:1,
@@ -228,7 +285,7 @@ export const PRODUCTS: Product[] = [
 
 export const SPORT_PRODUCTS: Product[] = [
   {
-    id: 1,
+    id: "1",
     name: "Mastermind Toys",
     description: "Brown cockroach wings",
     quantity:1,
@@ -244,7 +301,7 @@ export const SPORT_PRODUCTS: Product[] = [
     status: "New in",
   },
   {
-    id: 2,
+    id: "2",
     name: "Jump Rope Kids",
     description: "Classic green",
     quantity:1,
@@ -258,7 +315,7 @@ export const SPORT_PRODUCTS: Product[] = [
     status: "50% Discount",
   },
   {
-    id: 3,
+    id: "3",
     name: "Tee Ball Beanie",
     description: "New blue aqua",
     price: 132,
@@ -273,7 +330,7 @@ export const SPORT_PRODUCTS: Product[] = [
     allOfSizes: ["S", "M", "L", "XL", "2XL", "3XL"],
   },
   {
-    id: 4,
+    id:" 4",
     name: "Rubber Table Tennis",
     description: "Dark pink 2023",
     quantity:1,
@@ -287,7 +344,7 @@ export const SPORT_PRODUCTS: Product[] = [
     status: "Sold Out",
   },
   {
-    id: 5,
+    id:" 5",
     name: "Classic Blue Rugby",
     description: "Perfect mint green",
     price: 42,
@@ -302,7 +359,7 @@ export const SPORT_PRODUCTS: Product[] = [
     link: "/product-detail/",
   },
   {
-    id: 6,
+    id:" 6",
     name: "Manhattan Toy WRT",
     description: "New design 2023",
     price: 30,
@@ -315,7 +372,7 @@ export const SPORT_PRODUCTS: Product[] = [
     link: "/product-detail/",
   },
   {
-    id: 7,
+    id:" 7",
     name: "Tabletop Football ",
     quantity:1,
     description: "Matte black",
@@ -329,7 +386,7 @@ export const SPORT_PRODUCTS: Product[] = [
     status: "New in",
   },
   {
-    id: 8,
+    id:" 8",
     name: "Pvc Catching Toy",
     description: "Cream pink",
     price: 145,
