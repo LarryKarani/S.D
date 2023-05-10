@@ -10,6 +10,20 @@ export interface LocationStates {
   "/product-detail-2"?: {};
   "/page-collection"?: {};
   "/page-collection-2"?: {};
+  "/product-detail_save-the-date_9"?:{};
+  "/product-detail_save-the-date_8"?:{};
+  "/product-detail_save-the-date_93933"?:{};
+  "/product-detail_save-the-date_79789"?:{};
+  "/product-detail_save-the-date_147"?:{};
+  "/product-detail_save-the-date_7863"?:{};
+  "/product-detail_save-the-date_89"?:{};
+  "/product-detail_save-the-date_12"?:{};
+  "/product-detail_save-the-date_3"?:{};
+
+
+  "/product-detail_custom-made_234"?:{};
+  "/product-detail_custom-made_454325"?:{};
+  "/product-detail/:productId"?:{};
 
   "/custom-made"?: {};
   "/save-the-date"?: {};

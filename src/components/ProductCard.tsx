@@ -249,7 +249,7 @@ const ProductCard: FC<ProductCardProps> = ({
       >
         <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
           <Link
-            to={`/product-detail/${category}/${id}`}
+            to={`/product-detail_${category}_${id}`}
             className="block"
             // onClick={() =>
             //   handleChangeCurrentMedia({

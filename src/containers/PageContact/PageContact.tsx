@@ -14,16 +14,16 @@ export interface PageContactProps {
 
 const info = [
   {
-    title: "🗺 ADDRESS",
-    desc: "Photo booth tattooed prism, portland taiyaki hoodie neutra typewriter",
+    title: "🗺 כתובת",
+    desc: "כתובתנו היא ישראל, תל אביב ההגנה.",
   },
   {
-    title: "💌 EMAIL",
-    desc: "nc.example@example.com",
+    title: "💌 אימייל",
+    desc: "kiglerr@gmail.com",
   },
   {
-    title: "☎ PHONE",
-    desc: "000-123-456-7890",
+    title: "☎ טלפון",
+    desc: "050-7353157",
   },
 ];
 
@@ -36,11 +36,11 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
       <Helmet>
         <title>Contact || NFT React Template</title>
       </Helmet>
-      <div className="">
+      <div className="hebrew">
         <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center">
-          Contact
+          צור קשר
         </h2>
-        <div className="container max-w-7xl mx-auto">
+        <div className="container max-w-7xl mx-auto my-24">
           <div className="flex-shrink-0 grid grid-cols-1 md:grid-cols-2 gap-12 ">
             <div className="max-w-sm space-y-8">
               {info.map((item, index) => (
@@ -63,16 +63,12 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
             <div>
               <form className="grid grid-cols-1 gap-6" action="#" method="post">
                 <label className="block">
-                  <Label>Full name</Label>
+                  <Label>שם מלא</Label>
 
-                  <Input
-                    placeholder="Example Doe"
-                    type="text"
-                    className="mt-1"
-                  />
+                  <Input placeholder="" type="text" className="mt-1" />
                 </label>
                 <label className="block">
-                  <Label>Email address</Label>
+                  <Label>כתובת מייל</Label>
 
                   <Input
                     type="email"
@@ -81,24 +77,16 @@ const PageContact: FC<PageContactProps> = ({ className = "" }) => {
                   />
                 </label>
                 <label className="block">
-                  <Label>Message</Label>
+                  <Label>גוף ההודעה</Label>
 
                   <Textarea className="mt-1" rows={6} />
                 </label>
                 <div>
-                  <ButtonPrimary type="submit">Send Message</ButtonPrimary>
+                  <ButtonPrimary type="submit">שלח</ButtonPrimary>
                 </div>
               </form>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* OTHER SECTIONS */}
-      <div className="container">
-        <div className="relative my-24 lg:my-32 py-24 lg:py-32">
-          <BackgroundSection />
-          <SectionPromo1 />
         </div>
       </div>
     </div>

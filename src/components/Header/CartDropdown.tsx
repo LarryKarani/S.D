@@ -7,6 +7,8 @@ import ButtonPrimary from "shared/Button/ButtonPrimary";
 import ButtonSecondary from "shared/Button/ButtonSecondary";
 import { useAppSelector } from "../../app/hooks";
 
+import CartPage from "containers/ProductDetailPage/CartPage";
+
 export default function CartDropdown() {
   const selectedData2 = useAppSelector((state) => state.products);
 
@@ -133,37 +135,26 @@ export default function CartDropdown() {
               <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 dark:ring-white/10">
                 <div className="relative bg-white dark:bg-neutral-800">
                   <div className="max-h-[60vh] p-5 overflow-y-auto hiddenScrollbar">
-                    <h3 className="text-xl font-semibold">Shopping cart</h3>
+                    <h3 className="text-xl font-semibold">עגלת הקניות</h3>
                     <div className="divide-y divide-slate-100 dark:divide-slate-700">
-                      {[PRODUCTS[0], PRODUCTS[1], PRODUCTS[2]].map(
-                        (item, index) => renderProduct(item, index, close)
-                      )}
+                      <CartPage sum={"sumOrder"} />
                     </div>
                   </div>
                   <div className="bg-neutral-50 dark:bg-slate-900 p-5">
-                    <p className="flex justify-between font-semibold text-slate-900 dark:text-slate-100">
-                      <span>
-                        <span>Subtotal</span>
-                        <span className="block text-sm text-slate-500 dark:text-slate-400 font-normal">
-                          Shipping and taxes calculated at checkout.
-                        </span>
-                      </span>
-                      <span className="">$299.00</span>
-                    </p>
                     <div className="flex space-x-2 mt-5">
                       <ButtonSecondary
                         href="/cart"
                         className="flex-1 border border-slate-200 dark:border-slate-700"
                         onClick={close}
                       >
-                        View cart
+                        עגלת הקניות
                       </ButtonSecondary>
                       <ButtonPrimary
                         href="/checkout"
                         onClick={close}
                         className="flex-1"
                       >
-                        Check out
+                        הזמנה
                       </ButtonPrimary>
                     </div>
                   </div>

@@ -14,7 +14,6 @@ import productSport5 from "images/products/sport-5.png";
 import productSport6 from "images/products/sport-6.png";
 import productSport7 from "images/products/sport-7.png";
 import productSport8 from "images/products/sport-8.png";
-
 //
 
 export interface ProductVariant {
@@ -24,28 +23,33 @@ export interface ProductVariant {
   color?: string;
   featuredImage: string;
 }
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number
-  image: string;
-  description: string;
-  category: string;
-  tags: string[];
-  link: "/product-detail/";
-  variants?: ProductVariant[];
-  variantType?: "color" | "image";
-  sizes?: string[];
-  allOfSizes?: string[];
-  prodictimg?: string[];
-  status?: "New in" | "limited edition" | "Sold Out" | "50% Discount";
-  text?:string;
-  text2?:string;
-  size?:string;
-  der?:string;
-  color?:string;
-}
+
+
+  export interface Slug {
+slug?: string
+  }
+  export interface Product {
+    id: string;
+    name: string;
+    price: number;
+    quantity: number
+    image: string;
+    description: string;
+    category: string;
+    tags: string[];
+    link: "/product-detail/";
+    variants?: ProductVariant[];
+    variantType?: "color" | "image";
+    sizes?: string[];
+    allOfSizes?: string[];
+    prodictimg?: string[];
+    status?: "New in" | "limited edition" | "Sold Out" | "50% Discount";
+    text?:string;
+    text2?:string;
+    size?:string;
+    der?:string;
+    color?:string;
+  }
 
 
 const DEMO_VARIANTS: ProductVariant[] = [
@@ -257,7 +261,7 @@ export const PRODUCTS: Product[] = [
     quantity:1,
     description: "Matte black",
     price: 12,
-    image: productImgs[8],
+    image: productImgs[0],
     category: "Category 1",
     tags: ["tag1", "tag2"],
     variants: DEMO_VARIANTS,
@@ -271,7 +275,7 @@ export const PRODUCTS: Product[] = [
     description: "Cream pink",
     quantity:1,
     price: 145,
-    image: productImgs[7],
+    image: productImgs[0],
     category: "Category 1",
     tags: ["tag1", "tag2"],
     variants: DEMO_VARIANTS,

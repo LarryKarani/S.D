@@ -9,7 +9,7 @@ import Badge from "shared/Badge/Badge";
 
 export interface SectionHowItWorkProps {
   className?: string;
-  data?: typeof DEMO_DATA[0][];
+  data?: (typeof DEMO_DATA)[0][];
 }
 
 const DEMO_DATA = [
@@ -25,14 +25,14 @@ const DEMO_DATA = [
     img: HIW2img,
     imgDark: HIW2img,
     title: "בחרו את הטקסט",
-    desc: "Easily select the correct items and add them to the cart",
+    desc: "התאימו את הטקסט עבורכם ניתן לרשום שורה אחת או שתיים",
   },
   {
     id: 3,
     img: HIW3img,
     imgDark: HIW3img,
     title: "הוסיפו לעגלת הקניות המוצר ",
-    desc: "The carrier will confirm and ship quickly to you",
+    desc: "לאחר עיצוב השלט והבחירה שלכם השלט יחכה לכם בעגלת הקניות",
   },
 ];
 
@@ -51,7 +51,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
           src={VectorImg}
           alt="vector"
         />
-        {data.map((item: typeof DEMO_DATA[number], index: number) => (
+        {data.map((item: (typeof DEMO_DATA)[number], index: number) => (
           <div
             key={item.id}
             className="relative flex flex-col items-center max-w-xs mx-auto"

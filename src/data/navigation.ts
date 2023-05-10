@@ -230,48 +230,76 @@ const OTHER_PAGE_CHILD: NavItemType[] = [
   },
 ];
 
-export const NAVIGATION_DEMO_2: NavItemType[] = [
-  {
-    id: ncNanoId(),
-    href: "/#",
-    name: "Men",
-    type: "megaMenu",
-    children: MEGAMENU_DEMO,
-  },
-  {
-    id: ncNanoId(),
-    href: "/#",
-    name: "Women",
-  },
-  {
-    id: ncNanoId(),
-    href: "/#",
-    name: "Beauty",
-  },
-
-  {
-    id: ncNanoId(),
-    href: "/#",
-    name: "Sport",
-  },
-  {
-    id: ncNanoId(),
-    href: "/#",
-    name: "Templates",
-    type: "megaMenu",
-    children: MEGAMENU_TEMPLATES,
-  },
-  {
-    id: ncNanoId(),
-    href: "#",
-    name: "Explore",
-    type: "dropdown",
-    children: OTHER_PAGE_CHILD,
-  },
-];
 
 
 export const NAVIGATION_DEMO_1: NavItemType[] = [
+  {
+    id: ncNanoId(),
+    href: "/custom-made",
+    name: "עיצוב אישי",
+  },
+  {
+    id: ncNanoId(),
+    href: "/save-the-date",
+    name: "save the date",
+  },
+  
+  {
+    id: ncNanoId(),
+    href: "/truck",
+    name: "משאיות",
+  },
+  {
+    id: ncNanoId(),
+    href: "/houses-signs",
+    name: "כניסה לבית",
+  },
+  {
+    id: ncNanoId(),
+    href: "/dog-signs",
+    name: "כלב בחצר",
+  },
+  {
+    id: ncNanoId(),
+    href: "/parking-signs",
+    name: "חנייה פרטית ",
+  }
+  ,
+  {
+    id: ncNanoId(),
+    href: "/hairdressers-signs",
+    name: "בתי עסק",
+  },
+  {
+    id: ncNanoId(),
+    href: "/about",
+    name: "עוד",
+    type: "dropdown",
+    children: [
+      {
+        id: ncNanoId(),
+        href: "/about",
+        name: "אודות",
+      },
+      {
+        id: ncNanoId(),
+        href: "/contact",
+        name: "צור קשר",
+      },
+      {
+        id: ncNanoId(),
+        href: "/login",
+        name: "היכנס",
+      },
+      {
+        id: ncNanoId(),
+        href: "/signup",
+        name: "הירשם",
+      }
+    ],
+  },
+];
+export const NAVIGATION_DEMO_3: NavItemType[] = [
   {
     id: ncNanoId(),
     href: "/custom-made",
@@ -336,5 +364,32 @@ export const NAVIGATION_DEMO_1: NavItemType[] = [
         name: "הירשם",
       }
     ],
+  },
+];
+
+export const NAVIGATION_DEMO_2: NavItemType[] = [
+  {
+    id: ncNanoId(),
+    href: "/contact",
+    name: "צור קשר",
+  },
+  
+  {
+    id: ncNanoId(),
+    href: "/about",
+    name: "אודותינו",
+  },
+  {
+    id: ncNanoId(),
+    href: "/#",
+    name: "דף הבית",
+    
+  },
+  {
+    id: ncNanoId(),
+    href: "#",
+    name: "קטגוריות",
+    type: "dropdown",
+    children: NAVIGATION_DEMO_3,
   },
 ];

@@ -126,7 +126,7 @@ const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
                   <div className="absolute inset-y-6 inset-x-10 flex flex-col sm:items-center justify-center">
                     <div className="flex relative text-slate-900">
                       <span className="text-lg font-semibold ">
-                        More collections
+                        עוד קטגוריות
                       </span>
                       <svg
                         className="absolute left-full w-5 h-5 ml-2 rotate-45 group-hover:scale-110 transition-transform"
@@ -153,7 +153,7 @@ const SectionSliderCategories: FC<SectionSliderCategoriesProps> = ({
                       </svg>
                     </div>
                     <span className="text-sm mt-1 text-slate-800">
-                      Show me more
+                      המשך פיתוח
                     </span>
                   </div>
                 </div>

@@ -14,7 +14,7 @@ const MainNav2Logged: FC<MainNav2LoggedProps> = () => {
 
   const renderContent = () => {
     return (
-      <div className="h-20 flex justify-between">
+      <div className="h-20 flex justify-between ">
         <div className="flex items-center lg:hidden flex-1">
           <MenuBar />
         </div>

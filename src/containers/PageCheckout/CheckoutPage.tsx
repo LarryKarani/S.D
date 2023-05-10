@@ -121,20 +121,16 @@ const CheckoutPage = () => {
       </Helmet>
 
       <main className="container py-16 lg:pb-28 lg:pt-20 ">
-        <div className="mb-16">
+        <div className="hebrew mb-16">
           <h2 className="block text-2xl sm:text-3xl lg:text-4xl font-semibold ">
-            Checkout
+            הזמנה
           </h2>
           <div className="block mt-3 sm:mt-5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-400">
             <Link to={"/#"} className="">
-              Homepage
+              דף הבית
             </Link>
             <span className="text-xs mx-1 sm:mx-1.5">/</span>
-            <Link to={"/#"} className="">
-              Clothing Categories
-            </Link>
-            <span className="text-xs mx-1 sm:mx-1.5">/</span>
-            <span className="underline">Checkout</span>
+            <span className="underline">הזמנות</span>
           </div>
         </div>
 

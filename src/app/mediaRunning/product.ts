@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "app/store";
-import { Product } from "../../data/data";
+import { Product,Slug } from "../../data/data";
+import axios from "axios";
 
 const initialState: Product[] = [
 ];   
@@ -12,6 +13,8 @@ export const productSlice = createSlice({
     addProduct: (state, action: PayloadAction<Product>) => {
       const productExists = state.find(p => p.id === action.payload.id);
       if (!productExists) {
+       
+        console.log("qq",action.payload )
         state.push(action.payload);
         const serializedState = JSON.stringify(state);
         localStorage.setItem("state", serializedState);
@@ -54,10 +57,44 @@ export const productSlice = createSlice({
       const serializedState = JSON.stringify(state);
       localStorage.setItem("state", serializedState);
     },
-  },
-});
+    loadProduct: (state, action: PayloadAction<Slug>) => {
+      const url =
+      "https://us-central1-one-of-many-c94a4.cloudfunctions.net/getProductsBySlug"; // replace with your URL
 
-export const { addProduct,  updateProduct ,getProduct ,removeProduct} = productSlice.actions;
+      const data = {
+          slug: action.payload.slug,
+        };
+      
+ 
+      axios
+      .post(url, data)
+      .then((response) => {
+        console.log("ee",response.data[0][0]);
+        const updatedBob: Product = {
+            ...(response.data[0][0] as object),
+            id: "",
+            name: "",
+            price: 0,
+            quantity: 0,
+            image: "",
+            description: "",
+            category: "",
+            tags: [],
+            link: "/product-detail/"
+        };
+         console.log("ee",state);
+         if(updatedBob ){
+          state.push(response.data[0][0]);
+         }
+        
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
+}});
+
+export const {loadProduct ,addProduct,  updateProduct ,getProduct ,removeProduct} = productSlice.actions;
 
 export const selectProducts = (state: RootState) => state.products;
 

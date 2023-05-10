@@ -94,7 +94,7 @@ const SectionSliderProductCard: FC<SectionSliderProductCardProps> = ({
           <ul className="glide__slides">
             {data.length > 0
               ? data.map((item, index) => (
-                  <li key={index} className={`glide__slide `}>
+                  <li key={index}>
                     <ProductCard data={item} />
                   </li>
                 ))

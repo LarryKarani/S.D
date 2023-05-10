@@ -19,6 +19,7 @@ import PageSearch from "containers/PageSearch";
 import PageHome2 from "containers/PageHome/PageHome2";
 import PageHome3 from "containers/PageHome/PageHome3";
 import ProductDetailPage from "containers/ProductDetailPage/ProductDetailPage";
+import Chack from "containers/ProductDetailPage/Chack";
 import ProductDetailPage2 from "containers/ProductDetailPage/ProductDetailPage2";
 import AccountSavelists from "containers/AccountPage/AccountSavelists";
 import AccountPass from "containers/AccountPage/AccountPass";
@@ -36,6 +37,24 @@ export const pages: Page[] = [
   //
   { path: "/home-header-2", exact: true, component: PageHome },
   { path: "/product-detail", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_9", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_8", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_89", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_93933", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_79789", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_147", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_7863", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_12", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_12", component: ProductDetailPage },
+  { path: "/product-detail_save-the-date_3", component: ProductDetailPage },
+
+  { path: "/product-detail_custom-made_234", component: ProductDetailPage },
+  { path: "/product-detail_custom-made_234", component: ProductDetailPage },
+  {
+    path: "/product-detail_custom-made_454325",
+    component: ProductDetailPage,
+  },
+
   { path: "/product-detail-2", component: ProductDetailPage2 },
   //
   // { path: "/", component: PageCollection2 },

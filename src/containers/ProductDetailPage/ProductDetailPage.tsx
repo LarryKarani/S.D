@@ -59,9 +59,20 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
   const [variantActive, setVariantActive] = React.useState(0);
   const [sizeSelected, setSizeSelected] = React.useState(sizes ? sizes[0] : "");
   const [qualitySelected, setQualitySelected] = React.useState(1);
+
+  const [isActive1, setIsActive1] = useState(false);
+  const [isActive2, setIsActive2] = useState(false);
+  const [isActive3, setIsActive3] = useState(false);
+  const [isActive4, setIsActive4] = useState(false);
+  const [isActive5, setIsActive5] = useState(false);
+  const [isActive6, setIsActive6] = useState(false);
+  const [isActive7, setIsActive7] = useState(false);
+  const [isActive8, setIsActive8] = useState(false);
+
   const [isOpenModalViewAllReviews, setIsOpenModalViewAllReviews] =
     useState(false);
   const [slug, setSlug] = useState("");
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -69,11 +80,11 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
       const url =
         "https://us-central1-one-of-many-c94a4.cloudfunctions.net/getProductSDD";
       var path = window.location.pathname;
-      var directories = path.split("/");
+      var directories = path.split("_");
       var _id = directories[directories.length - 1];
       var _category = directories[directories.length - 2];
-      console.log(_id);
-      console.log(_category);
+      console.log("_category", _id);
+      console.log("_category", _category);
 
       const data = {
         collection: `product/by_catagory/${_category}`,
@@ -180,6 +191,56 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
     setSize("lg");
   };
 
+  const onClick1 = () => {
+    setIsActive1(true);
+    setIsActive2(false);
+    setIsActive3(false);
+    setSize("sm");
+  };
+  const onClick2 = () => {
+    setIsActive1(false);
+    setIsActive2(true);
+    setIsActive3(false);
+    setSize("lg");
+  };
+  const onClick3 = () => {
+    setIsActive1(false);
+    setIsActive2(false);
+    setIsActive3(true);
+    setSize("2xl");
+  };
+
+  const onClick4 = () => {
+    setIsActive4(true);
+    setIsActive5(false);
+    towRow();
+  };
+  const onClick5 = () => {
+    setIsActive4(false);
+    setIsActive5(true);
+    flege();
+  };
+
+  const onClick6 = () => {
+    setIsActive6(true);
+    setIsActive7(false);
+    setIsActive8(false);
+    setDer("hebrew-text-left");
+  };
+  const onClick7 = () => {
+    setIsActive6(false);
+    setIsActive7(true);
+    setIsActive8(false);
+
+    setDer("hebrew-text-center");
+  };
+  const onClick8 = () => {
+    setIsActive6(false);
+    setIsActive7(false);
+    setIsActive8(true);
+    setDer("hebrew-text");
+  };
+
   const renderSectionContent = () => {
     return (
       <div className="space-y-7 2xl:space-y-8">
@@ -235,24 +296,31 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
                 onChange={(e) => setText(e.target.value)}
               />
             </form>
+
             <div>
               <p className="text-m font-bold text-center m-2">גודל הטקסט</p>
-              <div className="flex justify-center ">
+              <div className="flex justify-center  ">
                 <ButtonPrimary
-                  className="bg-slate-500"
-                  onClick={() => setSize("sm")}
+                  className={`bg-slate-500 outline-none 
+                  ${isActive1 ? " ring-2 ring-offset-2 ring-primary-6000" : ""}
+                `}
+                  onClick={onClick1}
                 >
                   קטן
                 </ButtonPrimary>
                 <ButtonPrimary
-                  className="bg-slate-500"
-                  onClick={() => setSize("lg")}
+                  className={`bg-slate-500 outline-none 
+                  ${isActive2 ? " ring-2 ring-offset-2 ring-primary-6000" : ""}
+                `}
+                  onClick={onClick2}
                 >
                   בינוני
                 </ButtonPrimary>
                 <ButtonPrimary
-                  className="bg-slate-500"
-                  onClick={() => setSize("2xl")}
+                  className={`bg-slate-500 outline-none 
+                  ${isActive3 ? " ring-2 ring-offset-2 ring-primary-6000" : ""}
+                `}
+                  onClick={onClick3}
                 >
                   גדול
                 </ButtonPrimary>
@@ -281,12 +349,22 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
         )}
         {slug === "custom-made" ? (
           <div>
-            <p className="text-m font-bold text-center  m-2"> כמות שורות</p>
+            <p className="text-m font-bold text-center  m-2"> מספר שורות</p>
             <div className="flex justify-center ">
-              <ButtonPrimary className="bg-slate-500" onClick={towRow}>
+              <ButtonPrimary
+                className={`bg-slate-500 outline-none 
+                  ${isActive4 ? " ring-2 ring-offset-2 ring-primary-6000" : ""}
+                `}
+                onClick={onClick4}
+              >
                 שתי שורות
               </ButtonPrimary>{" "}
-              <ButtonPrimary className="bg-slate-500" onClick={flege}>
+              <ButtonPrimary
+                className={`bg-slate-500 outline-none 
+                  ${isActive5 ? " ring-2 ring-offset-2 ring-primary-6000" : ""}
+                `}
+                onClick={onClick5}
+              >
                 שורה אחת
               </ButtonPrimary>{" "}
             </div>
@@ -295,25 +373,31 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
 
         {slug === "custom-made" ? (
           <div>
-            <p className="text-m font-bold text-center  m-2">מיקום השלט</p>
+            <p className="text-m font-bold text-center  m-2">מיקום הטקסט</p>
             <div className="flex justify-center ">
               <ButtonPrimary
-                onClick={() => setDer("hebrew-text-left")}
-                className="bg-slate-500"
+                className={`bg-slate-500 outline-none 
+                  ${isActive6 ? " ring-2 ring-offset-2 ring-primary-6000" : ""}
+                `}
+                onClick={onClick6}
               >
                 שמאל
               </ButtonPrimary>
 
               <ButtonPrimary
-                className="bg-slate-500"
-                onClick={() => setDer("hebrew-text-center")}
+                className={`bg-slate-500 outline-none 
+                  ${isActive7 ? " ring-2 ring-offset-2 ring-primary-6000" : ""}
+                `}
+                onClick={onClick7}
               >
                 מרכז
               </ButtonPrimary>
 
               <ButtonPrimary
-                className="bg-slate-500"
-                onClick={() => setDer("hebrew-text")}
+                className={`bg-slate-500 outline-none 
+                  ${isActive8 ? " ring-2 ring-offset-2 ring-primary-6000" : ""}
+                `}
+                onClick={onClick8}
               >
                 ימינה
               </ButtonPrimary>
@@ -321,7 +405,7 @@ const ProductDetailPage: FC<ProductDetailPageProps> = ({ className = "" }) => {
           </div>
         ) : null}
         <div>
-          <p className="text-m font-bold text-center  m-2"> בחר צבע לאותיות</p>
+          <p className="text-m font-bold text-center  m-2">צבע טקסט</p>
           <div className="">{renderVariants()}</div>
         </div>
 
